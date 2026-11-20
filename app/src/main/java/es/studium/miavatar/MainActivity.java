@@ -8,20 +8,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.DialogFragment;
 
-public class MainActivity extends AppCompatActivity implements OnDialogoListener{
+public class MainActivity extends AppCompatActivity implements OnDialogoListener {
 
     Button btnNombre;
     Button btnSexo;
     Button btnRaza;
     Button btnProfesion;
-
-    DialogoNombre dialogoNombre;
-
+    
     private String nombre = null;
+    private int sexo = 0;
 
     private static final String TAG_DIALOGO_NOMBRE = "dialogoNombre";
+    private static final String TAG_DIALOGO_SEXO = "dialogoSexo";
+
     private static final String KEY_NOMBRE_BUNDLE = "nombre";
+    private static final String KEY_SEXO_BUNDLE = "sexo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,31 +37,43 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         });
 
         btnNombre = findViewById(R.id.btnNombre);
-        if(savedInstanceState != null){
-            nombre = savedInstanceState.getString(KEY_NOMBRE_BUNDLE);
-            ActualizarBotones.actualizarBotonNombre(btnNombre, nombre);
-        }
+        btnSexo = findViewById(R.id.btnSexo);
+
+
         btnNombre.setOnClickListener(v -> {
-            dialogoNombre = new DialogoNombre();
+            DialogoNombre dialogoNombre = new DialogoNombre();
             dialogoNombre.setCancelable(false);
-            crearBundle();
+            crearBundle(dialogoNombre);
             dialogoNombre.show(getSupportFragmentManager(), TAG_DIALOGO_NOMBRE);
         });
 
-        btnSexo = findViewById(R.id.btnSexo);
+        btnSexo.setOnClickListener(v -> {
+            DialogoSexo dialogoSexo = new DialogoSexo();
+            dialogoSexo.setCancelable(false);
+            crearBundle(dialogoSexo);
+            dialogoSexo.show(getSupportFragmentManager(), TAG_DIALOGO_SEXO);
+        });
 
+        if (savedInstanceState != null) {
+            nombre = savedInstanceState.getString(KEY_NOMBRE_BUNDLE);
+            sexo = savedInstanceState.getInt(KEY_SEXO_BUNDLE);
+            ActualizarBotones.actualizarBotonNombre(btnNombre, nombre);
+            ActualizarBotones.actualizarBotonSexo(btnSexo, sexo);
+        }
     }
 
-    private void crearBundle() {
+    private void crearBundle(DialogFragment dialogoAbierto) {
         Bundle bundle = new Bundle();
-        bundle.putString("nombre",this.nombre);
-        dialogoNombre.setArguments(bundle);
+        bundle.putString("nombre", this.nombre);
+        bundle.putInt("sexo", this.sexo);
+        dialogoAbierto.setArguments(bundle);
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState){
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(KEY_NOMBRE_BUNDLE, nombre);
+        outState.putInt(KEY_SEXO_BUNDLE, sexo);
     }
 
     @Override
@@ -72,14 +87,20 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     }
 
     @Override
-    public void onDialogoNombreCancelarListener() {}
-
-    @Override
-    public void onDialogoSexoGuardarListener() {
-
+    public void onDialogoNombreCancelarListener() {
     }
 
     @Override
-    public void onDialogoSexoCancelarListener() {}
+    public void onDialogoSexoGuardarListener(int sexoElegido) {
+        if(sexoElegido == -1) {
+            return;
+        }
+        this.sexo = sexoElegido;
+        ActualizarBotones.actualizarBotonSexo(btnSexo, this.sexo);
+    }
+
+    @Override
+    public void onDialogoSexoCancelarListener() {
+    }
 
 }
