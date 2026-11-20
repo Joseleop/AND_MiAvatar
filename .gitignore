@@ -1,0 +1,46 @@
+# Built application files
+*.apk
+*.apks
+*.aab
+
+# Files for the JVM (and Android) in the project
+.gradle/
+/build/
+/captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+
+# Android module build folders (útil si tienes subproyectos o librerías)
+*/build/
+
+# Signing files / Keystores (¡nunca subas claves privadas!)
+*.jks
+*.keystore
+
+# IDE specific files
+.idea/
+.DS_Store
+*.iml
+.classpath
+.project
+.settings/
+*.swp
+*.swo
+*~
+
+# Output directories
+/out/
+
+# Android Studio Navigation editor temp files
+.navigation/
+
+# Test results & coverage reports
+/test-results/
+/jacoco/
+*.exec
+
+# Logs & temporary files
+*.log
+/tmp/
+/temp/

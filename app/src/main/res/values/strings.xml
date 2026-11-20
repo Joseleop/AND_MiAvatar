@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Mi Avatar</string>
+    <string name="text_titulo_ficha">Configura tu personaje:</string>
+    <string name="texto_boton_nombre">Nombre</string>
+    <string name="texto_boton_sexo">Sexo</string>
+    <string name="texto_boton_razas">Raza</string>
+    <string name="texto_boton_profesion">Profesión</string>
+    <string name="texto_boton_reiniciar">Reiniciar</string>
+    <string name="texto_stats_vida">Vida:</string>
+    <string name="texto_stats_magia">Magia:</string>
+    <string name="texto_stats_fuerza">Fuerza:</string>
+    <string name="texto_stats_velocidad">Velocidad:</string>
+    <!-- Diálogo general-->
+    <string name="dialogo_aceptar">Aceptar</string>
+    <string name="dialogo_cancelar">Cancelar</string>
+    <!-- Diálogo nombre-->
+    <string name="dialogo_nombre_titulo">¿Cómo te llamas?</string>
+    <string name="dialogo_nombre_hint">Nombre</string>
+    <!-- Diálogo sexo -->
+    <string name="dialogo_sexo_titulo">¿Cuál es tu sexo?</string>
+    <string name="dialogo_sexo_hombre">Hombre</string>
+    <string name="dialogo_sexo_mujer">Mujer</string>
+</resources>
