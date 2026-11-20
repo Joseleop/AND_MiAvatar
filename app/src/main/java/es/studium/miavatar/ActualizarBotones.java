@@ -20,4 +20,18 @@ public class ActualizarBotones {
             btnSexo.setText(R.string.texto_boton_sexo);
         }
     }
+
+    public static void actualizarBotonRaza(Button btnRaza, int raza){
+        if(raza == DialogoRaza.CHECK_ELFO){
+            btnRaza.setText(R.string.dialogo_raza_elfo);
+        } else if (raza == DialogoRaza.CHECK_ENANO) {
+            btnRaza.setText(R.string.dialogo_raza_enano);
+        } else if (raza == DialogoRaza.CHECK_HOBBIT) {
+            btnRaza.setText(R.string.dialogo_raza_hobbit);
+        } else if (raza == DialogoRaza.CHECK_HUMANO) {
+            btnRaza.setText(R.string.dialogo_raza_humano);
+        } else {
+            btnRaza.setText(R.string.texto_boton_raza);
+        }
+    }
 }

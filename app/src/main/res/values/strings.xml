@@ -3,7 +3,7 @@
     <string name="text_titulo_ficha">Configura tu personaje:</string>
     <string name="texto_boton_nombre">Nombre</string>
     <string name="texto_boton_sexo">Sexo</string>
-    <string name="texto_boton_razas">Raza</string>
+    <string name="texto_boton_raza">Raza</string>
     <string name="texto_boton_profesion">Profesión</string>
     <string name="texto_boton_reiniciar">Reiniciar</string>
     <string name="texto_stats_vida">Vida:</string>
@@ -20,5 +20,18 @@
     <string name="dialogo_sexo_titulo">¿Cuál es tu sexo?</string>
     <string name="dialogo_sexo_hombre">Hombre</string>
     <string name="dialogo_sexo_mujer">Mujer</string>
-    
+    <!-- Diálogo raza -->
+    <string name="dialogo_raza_titulo">¿De qué raza eres?</string>
+    <string name="dialogo_raza_elfo">Elfo</string>
+    <string name="dialogo_raza_enano">Enano</string>
+    <string name="dialogo_raza_hobbit">Hobbit</string>
+    <string name="dialogo_raza_humano">Humano</string>
+
+    <!-- Diálogo profesión -->
+    <string name="dialogo_profesion_titulo">¿Cuál es tu profesión?</string>
+    <string name="dialogo_profesion_arquero">Arquero</string>
+    <string name="dialogo_profesion_guerrero">Guerrero</string>
+    <string name="dialogo_profesion_mago">Mago</string>
+    <string name="dialogo_profesion_herrero">Herrero</string>
+    <string name="dialogo_profesion_minero">Minero</string>
 </resources>

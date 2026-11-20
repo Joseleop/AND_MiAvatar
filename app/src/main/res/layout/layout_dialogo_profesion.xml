@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="8dp">
+
+    <RadioGroup
+        android:id="@+id/rgProfesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rbArquero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialogo_profesion_arquero" />
+
+        <RadioButton
+            android:id="@+id/rbGuerrero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialogo_profesion_guerrero" />
+
+        <RadioButton
+            android:id="@+id/rbMago"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialogo_profesion_mago" />
+
+        <RadioButton
+            android:id="@+id/rbHerrero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialogo_profesion_herrero" />
+
+        <RadioButton
+            android:id="@+id/rbMinero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialogo_profesion_minero" />
+
+    </RadioGroup>
+
+</LinearLayout>

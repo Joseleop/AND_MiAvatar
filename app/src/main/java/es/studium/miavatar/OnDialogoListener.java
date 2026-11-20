@@ -1,8 +1,12 @@
 package es.studium.miavatar;
 
 public interface OnDialogoListener {
-    public void onDialogoNombreGuardarListener(String nombre);
-    public void onDialogoNombreCancelarListener();
-    public void onDialogoSexoGuardarListener(int sexoElegido);
-    public void onDialogoSexoCancelarListener();
+    void onDialogoNombreGuardarListener(String nombre);
+    void onDialogoNombreCancelarListener();
+
+    void onDialogoSexoGuardarListener(int sexoElegido);
+    void onDialogoSexoCancelarListener();
+
+    void onDialogoRazaGuardarListener(int razaElegida);
+    void onDialogoRazaCancelarListener();
 }
