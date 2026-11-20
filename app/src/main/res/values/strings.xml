@@ -20,4 +20,5 @@
     <string name="dialogo_sexo_titulo">¿Cuál es tu sexo?</string>
     <string name="dialogo_sexo_hombre">Hombre</string>
     <string name="dialogo_sexo_mujer">Mujer</string>
+    
 </resources>

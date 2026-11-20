@@ -14,6 +14,11 @@ import androidx.fragment.app.DialogFragment;
 public class DialogoSexo extends DialogFragment {
     private OnDialogoListener listener;
 
+    public static final String KEY_SEXO_BUNDLE = "sexo";
+
+    public static final int CHECK_HOMBRE = 1;
+    public static final int CHECK_MUJER = 2;
+    public static final int CHECK_SIN_ELEGIR = -1;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
@@ -25,10 +30,10 @@ public class DialogoSexo extends DialogFragment {
 
         Bundle arguments = getArguments();
         if(arguments != null){
-            int sexo = arguments.getInt("sexo");
-            if(sexo == 1){
+            int sexo = arguments.getInt(KEY_SEXO_BUNDLE, CHECK_SIN_ELEGIR);
+            if(sexo == CHECK_HOMBRE){
                 rgSexo.check(R.id.rbHombre);
-            } else if (sexo == 2) {
+            } else if (sexo == CHECK_MUJER) {
                 rgSexo.check(R.id.rbMujer);
             }
         }
@@ -39,14 +44,14 @@ public class DialogoSexo extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         int sexo = rgSexo.getCheckedRadioButtonId();
-                        int sexoElegido = 0;
+                        int sexoElegido;
                         if(sexo == R.id.rbHombre){
-                            sexoElegido = 1;
+                            sexoElegido = CHECK_HOMBRE;
                         } else if (sexo == R.id.rbMujer) {
-                            sexoElegido = 2;
+                            sexoElegido = CHECK_MUJER;
                         }
                         else {
-                            sexoElegido = -1;
+                            sexoElegido = CHECK_SIN_ELEGIR;
                         }
                         listener.onDialogoSexoGuardarListener(sexoElegido);
                     }

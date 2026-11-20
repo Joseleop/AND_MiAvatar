@@ -16,15 +16,15 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     Button btnSexo;
     Button btnRaza;
     Button btnProfesion;
-    
+
     private String nombre = null;
-    private int sexo = 0;
+    private int sexo = DialogoSexo.CHECK_SIN_ELEGIR;
 
     private static final String TAG_DIALOGO_NOMBRE = "dialogoNombre";
     private static final String TAG_DIALOGO_SEXO = "dialogoSexo";
 
-    private static final String KEY_NOMBRE_BUNDLE = "nombre";
-    private static final String KEY_SEXO_BUNDLE = "sexo";
+    //private static final String KEY_NOMBRE_BUNDLE = "nombre";
+    //private static final String KEY_SEXO_BUNDLE = "sexo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         });
 
         if (savedInstanceState != null) {
-            nombre = savedInstanceState.getString(KEY_NOMBRE_BUNDLE);
-            sexo = savedInstanceState.getInt(KEY_SEXO_BUNDLE);
+            nombre = savedInstanceState.getString(DialogoNombre.KEY_NOMBRE_BUNDLE);
+            sexo = savedInstanceState.getInt(DialogoSexo.KEY_SEXO_BUNDLE, DialogoSexo.CHECK_SIN_ELEGIR);
             ActualizarBotones.actualizarBotonNombre(btnNombre, nombre);
             ActualizarBotones.actualizarBotonSexo(btnSexo, sexo);
         }
@@ -64,16 +64,16 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
 
     private void crearBundle(DialogFragment dialogoAbierto) {
         Bundle bundle = new Bundle();
-        bundle.putString("nombre", this.nombre);
-        bundle.putInt("sexo", this.sexo);
+        bundle.putString(DialogoNombre.KEY_NOMBRE_BUNDLE, this.nombre);
+        bundle.putInt(DialogoSexo.KEY_SEXO_BUNDLE, this.sexo);
         dialogoAbierto.setArguments(bundle);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(KEY_NOMBRE_BUNDLE, nombre);
-        outState.putInt(KEY_SEXO_BUNDLE, sexo);
+        outState.putString(DialogoNombre.KEY_NOMBRE_BUNDLE, nombre);
+        outState.putInt(DialogoSexo.KEY_SEXO_BUNDLE, sexo);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
 
     @Override
     public void onDialogoSexoGuardarListener(int sexoElegido) {
-        if(sexoElegido == -1) {
+        if(sexoElegido == DialogoSexo.CHECK_SIN_ELEGIR) {
             return;
         }
         this.sexo = sexoElegido;

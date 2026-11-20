@@ -17,6 +17,8 @@ public class DialogoNombre extends DialogFragment {
 
     private OnDialogoListener listener;
 
+    public static final String KEY_NOMBRE_BUNDLE = "nombre";
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -26,7 +28,7 @@ public class DialogoNombre extends DialogFragment {
         EditText etNombre = dialogoNombreInflado.findViewById(R.id.editTextNombre);
 
         if (getArguments() != null) {
-            etNombre.setText(getArguments().getString("nombre"));
+            etNombre.setText(getArguments().getString(KEY_NOMBRE_BUNDLE));
         }
 
         builder.setView(dialogoNombreInflado);
