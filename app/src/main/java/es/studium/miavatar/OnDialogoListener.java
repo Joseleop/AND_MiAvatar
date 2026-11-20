@@ -9,4 +9,7 @@ public interface OnDialogoListener {
 
     void onDialogoRazaGuardarListener(int razaElegida);
     void onDialogoRazaCancelarListener();
+
+    void onDialogoProfesionGuardarListener(int profesionElegida);
+    void onDialogoProfesionCancelarListener();
 }

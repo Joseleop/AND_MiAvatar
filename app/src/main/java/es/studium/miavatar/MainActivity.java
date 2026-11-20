@@ -19,13 +19,12 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     private String nombre = null;
     private int sexo = DialogoSexo.CHECK_SEXO_SIN_ELEGIR;
     private int raza = DialogoRaza.CHECK_RAZA_SIN_ELEGIR;
+    private int profesion = DialogoProfesion.CHECK_PROFESION_SIN_ELEGIR;
 
     private static final String TAG_DIALOGO_NOMBRE = "dialogoNombre";
     private static final String TAG_DIALOGO_SEXO = "dialogoSexo";
     private static final String TAG_DIALOGO_RAZA = "dialogoRaza";
-
-    //private static final String KEY_NOMBRE_BUNDLE = "nombre";
-    //private static final String KEY_SEXO_BUNDLE = "sexo";
+    private static final String TAG_DIALOGO_PROFESION = "dialogoProfesion";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         btnNombre = findViewById(R.id.btnNombre);
         btnSexo = findViewById(R.id.btnSexo);
         btnRaza = findViewById(R.id.btnRaza);
+        btnProfesion = findViewById(R.id.btnProfesion);
 
 
         btnNombre.setOnClickListener(v -> {
@@ -63,13 +63,22 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
             dialogoRaza.show(getSupportFragmentManager(), TAG_DIALOGO_RAZA);
         });
 
+        btnProfesion.setOnClickListener(v -> {
+            DialogoProfesion dialogoProfesion = new DialogoProfesion();
+            dialogoProfesion.setCancelable(false);
+            crearBundle(dialogoProfesion);
+            dialogoProfesion.show(getSupportFragmentManager(), TAG_DIALOGO_PROFESION);
+        });
+
         if (savedInstanceState != null) {
             nombre = savedInstanceState.getString(DialogoNombre.KEY_NOMBRE_BUNDLE);
             sexo = savedInstanceState.getInt(DialogoSexo.KEY_SEXO_BUNDLE, DialogoSexo.CHECK_SEXO_SIN_ELEGIR);
             raza = savedInstanceState.getInt(DialogoRaza.KEY_RAZA_BUNDLE, DialogoRaza.CHECK_RAZA_SIN_ELEGIR);
+            profesion = savedInstanceState.getInt(DialogoProfesion.KEY_PROFESION_BUNDLE, DialogoProfesion.CHECK_PROFESION_SIN_ELEGIR);
             ActualizarBotones.actualizarBotonNombre(btnNombre, nombre);
             ActualizarBotones.actualizarBotonSexo(btnSexo, sexo);
             ActualizarBotones.actualizarBotonRaza(btnRaza, raza);
+            ActualizarBotones.actualizarBotonProfesion(btnProfesion, profesion);
         }
     }
 
@@ -78,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         bundle.putString(DialogoNombre.KEY_NOMBRE_BUNDLE, this.nombre);
         bundle.putInt(DialogoSexo.KEY_SEXO_BUNDLE, this.sexo);
         bundle.putInt(DialogoRaza.KEY_RAZA_BUNDLE, this.raza);
+        bundle.putInt(DialogoProfesion.KEY_PROFESION_BUNDLE, this.profesion);
         dialogoAbierto.setArguments(bundle);
     }
 
@@ -87,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         outState.putString(DialogoNombre.KEY_NOMBRE_BUNDLE, nombre);
         outState.putInt(DialogoSexo.KEY_SEXO_BUNDLE, sexo);
         outState.putInt(DialogoRaza.KEY_RAZA_BUNDLE, raza);
+        outState.putInt(DialogoProfesion.KEY_PROFESION_BUNDLE, profesion);
     }
 
     @Override
@@ -101,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
 
     @Override
     public void onDialogoSexoGuardarListener(int sexoElegido) {
-        if(sexoElegido == DialogoSexo.CHECK_SEXO_SIN_ELEGIR) {
+        if (sexoElegido == DialogoSexo.CHECK_SEXO_SIN_ELEGIR) {
             return;
         }
         this.sexo = sexoElegido;
@@ -110,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
 
     @Override
     public void onDialogoRazaGuardarListener(int razaElegida) {
-        if(razaElegida == DialogoRaza.CHECK_RAZA_SIN_ELEGIR){
+        if (razaElegida == DialogoRaza.CHECK_RAZA_SIN_ELEGIR) {
             return;
         }
         this.raza = razaElegida;
@@ -118,14 +129,22 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     }
 
     @Override
-    public void onDialogoNombreCancelarListener() {
+    public void onDialogoProfesionGuardarListener(int profesionElegida) {
+        if (profesionElegida == DialogoProfesion.CHECK_PROFESION_SIN_ELEGIR) {
+            return;
+        }
+        this.profesion = profesionElegida;
+        ActualizarBotones.actualizarBotonProfesion(btnProfesion, this.profesion);
     }
-    @Override
-    public void onDialogoSexoCancelarListener() {
-    }
-    @Override
-    public void onDialogoRazaCancelarListener() {
 
-    }
+
+    @Override
+    public void onDialogoNombreCancelarListener() {}
+    @Override
+    public void onDialogoSexoCancelarListener() {}
+    @Override
+    public void onDialogoRazaCancelarListener() {}
+    @Override
+    public void onDialogoProfesionCancelarListener() {}
 
 }
