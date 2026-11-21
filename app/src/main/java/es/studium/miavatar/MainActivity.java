@@ -1,6 +1,8 @@
 package es.studium.miavatar;
 
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,12 +18,16 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     Button btnRaza;
     Button btnProfesion;
 
+    View layoutFicha;
+    Button btnReset;
+
     private final Personaje personaje = new Personaje();
 
     private static final String TAG_DIALOGO_NOMBRE = "dialogoNombre";
     private static final String TAG_DIALOGO_SEXO = "dialogoSexo";
     private static final String TAG_DIALOGO_RAZA = "dialogoRaza";
     private static final String TAG_DIALOGO_PROFESION = "dialogoProfesion";
+    private static final String TAG_DIALOGO_REINICIAR = "dialogoReiniciar";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         btnRaza = findViewById(R.id.btnRaza);
         btnProfesion = findViewById(R.id.btnProfesion);
 
+        layoutFicha = findViewById(R.id.layout_second);
+        btnReset = findViewById(R.id.btnReset);
 
         btnNombre.setOnClickListener(v -> {
             DialogoNombre dialogoNombre = new DialogoNombre();
@@ -67,6 +75,13 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
             dialogoProfesion.show(getSupportFragmentManager(), TAG_DIALOGO_PROFESION);
         });
 
+        btnReset.setOnClickListener(v -> {
+            DialogoReiniciar dialogoReiniciar = new DialogoReiniciar();
+            dialogoReiniciar.setCancelable(false);
+            dialogoReiniciar.show(getSupportFragmentManager(), TAG_DIALOGO_REINICIAR);
+        });
+
+        //Con esto pintamos los datos de cada botón tras girar el móvil
         if (savedInstanceState != null) {
             personaje.setNombre(savedInstanceState.getString(DialogoNombre.KEY_NOMBRE_BUNDLE));
             personaje.setSexo(savedInstanceState.getInt(DialogoSexo.KEY_SEXO_BUNDLE, Personaje.CHECK_SEXO_SIN_ELEGIR));
@@ -76,8 +91,10 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
             ActualizarBotones.actualizarBotonSexo(btnSexo, personaje.getSexo());
             ActualizarBotones.actualizarBotonRaza(btnRaza, personaje.getRaza());
             ActualizarBotones.actualizarBotonProfesion(btnProfesion, personaje.getProfesion());
+            actualizarFichaPersonaje();
         }
     }
+
     //Este bundle es el que sirve para llevar los datos si están rellenos al diálogo
     private void crearBundle(DialogFragment dialogoAbierto) {
         Bundle bundle = new Bundle();
@@ -88,7 +105,14 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         dialogoAbierto.setArguments(bundle);
     }
 
-    //Con este bundle se quedan los campos tras girar el movil
+    private void actualizarFichaPersonaje() {
+        if (personaje.estaCompleto()) {
+            layoutFicha.setVisibility(View.VISIBLE);
+        } else {
+            layoutFicha.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -106,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
             personaje.setNombre(nombre);
         }
         ActualizarBotones.actualizarBotonNombre(btnNombre, personaje.getNombre());
+        actualizarFichaPersonaje();
     }
 
     @Override
@@ -115,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         }
         personaje.setSexo(sexoElegido);
         ActualizarBotones.actualizarBotonSexo(btnSexo, personaje.getSexo());
+        actualizarFichaPersonaje();
     }
 
     @Override
@@ -124,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         }
         personaje.setRaza(razaElegida);
         ActualizarBotones.actualizarBotonRaza(btnRaza, personaje.getRaza());
+        actualizarFichaPersonaje();
     }
 
     @Override
@@ -133,16 +160,34 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         }
         personaje.setProfesion(profesionElegida);
         ActualizarBotones.actualizarBotonProfesion(btnProfesion, personaje.getProfesion());
+        actualizarFichaPersonaje();
+    }
+
+
+    @Override
+    public void onDialogoReiniciarAceptarListener() {
+        personaje.reiniciar();
+        ActualizarBotones.actualizarBotonNombre(btnNombre, personaje.getNombre());
+        ActualizarBotones.actualizarBotonSexo(btnSexo, personaje.getSexo());
+        ActualizarBotones.actualizarBotonRaza(btnRaza, personaje.getRaza());
+        ActualizarBotones.actualizarBotonProfesion(btnProfesion, personaje.getProfesion());
+        actualizarFichaPersonaje();
     }
 
 
     @Override
     public void onDialogoNombreCancelarListener() {}
+
     @Override
     public void onDialogoSexoCancelarListener() {}
+
     @Override
     public void onDialogoRazaCancelarListener() {}
+
     @Override
     public void onDialogoProfesionCancelarListener() {}
+
+    @Override
+    public void onDialogoReiniciarCancelarListener() {}
 
 }

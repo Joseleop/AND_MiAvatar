@@ -12,4 +12,8 @@ public interface OnDialogoListener {
 
     void onDialogoProfesionGuardarListener(int profesionElegida);
     void onDialogoProfesionCancelarListener();
+
+    void onDialogoReiniciarAceptarListener();
+
+    void onDialogoReiniciarCancelarListener();
 }
