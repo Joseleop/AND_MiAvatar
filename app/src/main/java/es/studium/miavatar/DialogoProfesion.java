@@ -16,13 +16,6 @@ public class DialogoProfesion extends DialogFragment {
 
     public static final String KEY_PROFESION_BUNDLE = "profesion";
 
-    public static final int CHECK_PROFESION_SIN_ELEGIR = -1;
-    public static final int CHECK_ARQUERO = 1;
-    public static final int CHECK_GUERRERO = 2;
-    public static final int CHECK_MAGO = 3;
-    public static final int CHECK_HERRERO = 4;
-    public static final int CHECK_MINERO = 5;
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -32,17 +25,17 @@ public class DialogoProfesion extends DialogFragment {
 
         Bundle arguments = getArguments();
         if(arguments != null){
-            int profesion = arguments.getInt(KEY_PROFESION_BUNDLE, CHECK_PROFESION_SIN_ELEGIR);
+            int profesion = arguments.getInt(KEY_PROFESION_BUNDLE, Personaje.CHECK_PROFESION_SIN_ELEGIR);
 
-            if(profesion == CHECK_ARQUERO){
+            if(profesion == Personaje.CHECK_ARQUERO){
                 rgProfesion.check(R.id.rbArquero);
-            } else if (profesion == CHECK_GUERRERO) {
+            } else if (profesion == Personaje.CHECK_GUERRERO) {
                 rgProfesion.check(R.id.rbGuerrero);
-            } else if (profesion == CHECK_MAGO) {
+            } else if (profesion == Personaje.CHECK_MAGO) {
                 rgProfesion.check(R.id.rbMago);
-            } else if (profesion == CHECK_HERRERO) {
+            } else if (profesion == Personaje.CHECK_HERRERO) {
                 rgProfesion.check(R.id.rbHerrero);
-            } else if (profesion == CHECK_MINERO) {
+            } else if (profesion == Personaje.CHECK_MINERO) {
                 rgProfesion.check(R.id.rbMinero);
             }
         }
@@ -56,17 +49,17 @@ public class DialogoProfesion extends DialogFragment {
                         int profesionElegida;
 
                         if(profesion == R.id.rbArquero){
-                            profesionElegida = CHECK_ARQUERO;
+                            profesionElegida = Personaje.CHECK_ARQUERO;
                         } else if (profesion == R.id.rbGuerrero) {
-                            profesionElegida = CHECK_GUERRERO;
+                            profesionElegida = Personaje.CHECK_GUERRERO;
                         } else if (profesion == R.id.rbMago) {
-                            profesionElegida = CHECK_MAGO;
+                            profesionElegida = Personaje.CHECK_MAGO;
                         } else if (profesion == R.id.rbHerrero) {
-                            profesionElegida = CHECK_HERRERO;
+                            profesionElegida = Personaje.CHECK_HERRERO;
                         } else if (profesion == R.id.rbMinero) {
-                            profesionElegida = CHECK_MINERO;
+                            profesionElegida = Personaje.CHECK_MINERO;
                         } else {
-                            profesionElegida = CHECK_PROFESION_SIN_ELEGIR;
+                            profesionElegida = Personaje.CHECK_PROFESION_SIN_ELEGIR;
                         }
                         listener.onDialogoProfesionGuardarListener(profesionElegida);
                     }

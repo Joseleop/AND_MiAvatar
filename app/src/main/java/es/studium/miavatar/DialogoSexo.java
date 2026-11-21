@@ -16,10 +16,6 @@ public class DialogoSexo extends DialogFragment {
 
     public static final String KEY_SEXO_BUNDLE = "sexo";
 
-    public static final int CHECK_SEXO_SIN_ELEGIR = -1;
-    public static final int CHECK_HOMBRE = 1;
-    public static final int CHECK_MUJER = 2;
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -30,10 +26,10 @@ public class DialogoSexo extends DialogFragment {
 
         Bundle arguments = getArguments();
         if(arguments != null){
-            int sexo = arguments.getInt(KEY_SEXO_BUNDLE, CHECK_SEXO_SIN_ELEGIR);
-            if(sexo == CHECK_HOMBRE){
+            int sexo = arguments.getInt(KEY_SEXO_BUNDLE, Personaje.CHECK_SEXO_SIN_ELEGIR);
+            if(sexo == Personaje.CHECK_HOMBRE){
                 rgSexo.check(R.id.rbHombre);
-            } else if (sexo == CHECK_MUJER) {
+            } else if (sexo == Personaje.CHECK_MUJER) {
                 rgSexo.check(R.id.rbMujer);
             }
         }
@@ -46,12 +42,12 @@ public class DialogoSexo extends DialogFragment {
                         int sexo = rgSexo.getCheckedRadioButtonId();
                         int sexoElegido;
                         if(sexo == R.id.rbHombre){
-                            sexoElegido = CHECK_HOMBRE;
+                            sexoElegido = Personaje.CHECK_HOMBRE;
                         } else if (sexo == R.id.rbMujer) {
-                            sexoElegido = CHECK_MUJER;
+                            sexoElegido = Personaje.CHECK_MUJER;
                         }
                         else {
-                            sexoElegido = CHECK_SEXO_SIN_ELEGIR;
+                            sexoElegido = Personaje.CHECK_SEXO_SIN_ELEGIR;
                         }
                         listener.onDialogoSexoGuardarListener(sexoElegido);
                     }

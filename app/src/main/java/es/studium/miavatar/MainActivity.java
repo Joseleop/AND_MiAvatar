@@ -16,10 +16,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     Button btnRaza;
     Button btnProfesion;
 
-    private String nombre = null;
-    private int sexo = DialogoSexo.CHECK_SEXO_SIN_ELEGIR;
-    private int raza = DialogoRaza.CHECK_RAZA_SIN_ELEGIR;
-    private int profesion = DialogoProfesion.CHECK_PROFESION_SIN_ELEGIR;
+    private final Personaje personaje = new Personaje();
 
     private static final String TAG_DIALOGO_NOMBRE = "dialogoNombre";
     private static final String TAG_DIALOGO_SEXO = "dialogoSexo";
@@ -71,70 +68,71 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         });
 
         if (savedInstanceState != null) {
-            nombre = savedInstanceState.getString(DialogoNombre.KEY_NOMBRE_BUNDLE);
-            sexo = savedInstanceState.getInt(DialogoSexo.KEY_SEXO_BUNDLE, DialogoSexo.CHECK_SEXO_SIN_ELEGIR);
-            raza = savedInstanceState.getInt(DialogoRaza.KEY_RAZA_BUNDLE, DialogoRaza.CHECK_RAZA_SIN_ELEGIR);
-            profesion = savedInstanceState.getInt(DialogoProfesion.KEY_PROFESION_BUNDLE, DialogoProfesion.CHECK_PROFESION_SIN_ELEGIR);
-            ActualizarBotones.actualizarBotonNombre(btnNombre, nombre);
-            ActualizarBotones.actualizarBotonSexo(btnSexo, sexo);
-            ActualizarBotones.actualizarBotonRaza(btnRaza, raza);
-            ActualizarBotones.actualizarBotonProfesion(btnProfesion, profesion);
+            personaje.setNombre(savedInstanceState.getString(DialogoNombre.KEY_NOMBRE_BUNDLE));
+            personaje.setSexo(savedInstanceState.getInt(DialogoSexo.KEY_SEXO_BUNDLE, Personaje.CHECK_SEXO_SIN_ELEGIR));
+            personaje.setRaza(savedInstanceState.getInt(DialogoRaza.KEY_RAZA_BUNDLE, Personaje.CHECK_RAZA_SIN_ELEGIR));
+            personaje.setProfesion(savedInstanceState.getInt(DialogoProfesion.KEY_PROFESION_BUNDLE, Personaje.CHECK_PROFESION_SIN_ELEGIR));
+            ActualizarBotones.actualizarBotonNombre(btnNombre, personaje.getNombre());
+            ActualizarBotones.actualizarBotonSexo(btnSexo, personaje.getSexo());
+            ActualizarBotones.actualizarBotonRaza(btnRaza, personaje.getRaza());
+            ActualizarBotones.actualizarBotonProfesion(btnProfesion, personaje.getProfesion());
         }
     }
-
+    //Este bundle es el que sirve para llevar los datos si están rellenos al diálogo
     private void crearBundle(DialogFragment dialogoAbierto) {
         Bundle bundle = new Bundle();
-        bundle.putString(DialogoNombre.KEY_NOMBRE_BUNDLE, this.nombre);
-        bundle.putInt(DialogoSexo.KEY_SEXO_BUNDLE, this.sexo);
-        bundle.putInt(DialogoRaza.KEY_RAZA_BUNDLE, this.raza);
-        bundle.putInt(DialogoProfesion.KEY_PROFESION_BUNDLE, this.profesion);
+        bundle.putString(DialogoNombre.KEY_NOMBRE_BUNDLE, personaje.getNombre());
+        bundle.putInt(DialogoSexo.KEY_SEXO_BUNDLE, personaje.getSexo());
+        bundle.putInt(DialogoRaza.KEY_RAZA_BUNDLE, personaje.getRaza());
+        bundle.putInt(DialogoProfesion.KEY_PROFESION_BUNDLE, personaje.getProfesion());
         dialogoAbierto.setArguments(bundle);
     }
 
+    //Con este bundle se quedan los campos tras girar el movil
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(DialogoNombre.KEY_NOMBRE_BUNDLE, nombre);
-        outState.putInt(DialogoSexo.KEY_SEXO_BUNDLE, sexo);
-        outState.putInt(DialogoRaza.KEY_RAZA_BUNDLE, raza);
-        outState.putInt(DialogoProfesion.KEY_PROFESION_BUNDLE, profesion);
+        outState.putString(DialogoNombre.KEY_NOMBRE_BUNDLE, personaje.getNombre());
+        outState.putInt(DialogoSexo.KEY_SEXO_BUNDLE, personaje.getSexo());
+        outState.putInt(DialogoRaza.KEY_RAZA_BUNDLE, personaje.getRaza());
+        outState.putInt(DialogoProfesion.KEY_PROFESION_BUNDLE, personaje.getProfesion());
     }
 
     @Override
     public void onDialogoNombreGuardarListener(String nombre) {
         if (nombre.isEmpty()) {
-            this.nombre = null;
+            personaje.setNombre(null);
         } else {
-            this.nombre = nombre;
+            personaje.setNombre(nombre);
         }
-        ActualizarBotones.actualizarBotonNombre(btnNombre, this.nombre);
+        ActualizarBotones.actualizarBotonNombre(btnNombre, personaje.getNombre());
     }
 
     @Override
     public void onDialogoSexoGuardarListener(int sexoElegido) {
-        if (sexoElegido == DialogoSexo.CHECK_SEXO_SIN_ELEGIR) {
+        if (sexoElegido == Personaje.CHECK_SEXO_SIN_ELEGIR) {
             return;
         }
-        this.sexo = sexoElegido;
-        ActualizarBotones.actualizarBotonSexo(btnSexo, this.sexo);
+        personaje.setSexo(sexoElegido);
+        ActualizarBotones.actualizarBotonSexo(btnSexo, personaje.getSexo());
     }
 
     @Override
     public void onDialogoRazaGuardarListener(int razaElegida) {
-        if (razaElegida == DialogoRaza.CHECK_RAZA_SIN_ELEGIR) {
+        if (razaElegida == Personaje.CHECK_RAZA_SIN_ELEGIR) {
             return;
         }
-        this.raza = razaElegida;
-        ActualizarBotones.actualizarBotonRaza(btnRaza, this.raza);
+        personaje.setRaza(razaElegida);
+        ActualizarBotones.actualizarBotonRaza(btnRaza, personaje.getRaza());
     }
 
     @Override
     public void onDialogoProfesionGuardarListener(int profesionElegida) {
-        if (profesionElegida == DialogoProfesion.CHECK_PROFESION_SIN_ELEGIR) {
+        if (profesionElegida == Personaje.CHECK_PROFESION_SIN_ELEGIR) {
             return;
         }
-        this.profesion = profesionElegida;
-        ActualizarBotones.actualizarBotonProfesion(btnProfesion, this.profesion);
+        personaje.setProfesion(profesionElegida);
+        ActualizarBotones.actualizarBotonProfesion(btnProfesion, personaje.getProfesion());
     }
 
 

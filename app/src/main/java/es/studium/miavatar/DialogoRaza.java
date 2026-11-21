@@ -16,12 +16,6 @@ public class DialogoRaza extends DialogFragment {
 
     public static final String KEY_RAZA_BUNDLE = "raza";
 
-    public static final int CHECK_RAZA_SIN_ELEGIR = -1;
-    public static final int CHECK_ELFO = 1;
-    public static final int CHECK_ENANO = 2;
-    public static final int CHECK_HOBBIT = 3;
-    public static final int CHECK_HUMANO = 4;
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -32,15 +26,15 @@ public class DialogoRaza extends DialogFragment {
 
         Bundle arguments = getArguments();
         if(arguments != null){
-            int raza = arguments.getInt(KEY_RAZA_BUNDLE, CHECK_RAZA_SIN_ELEGIR);
+            int raza = arguments.getInt(KEY_RAZA_BUNDLE, Personaje.CHECK_RAZA_SIN_ELEGIR);
 
-            if(raza == CHECK_ELFO){
+            if(raza == Personaje.CHECK_ELFO){
                 rgRaza.check(R.id.rbElfo);
-            } else if (raza == CHECK_ENANO) {
+            } else if (raza == Personaje.CHECK_ENANO) {
                 rgRaza.check(R.id.rbEnano);
-            } else if (raza == CHECK_HOBBIT) {
+            } else if (raza == Personaje.CHECK_HOBBIT) {
                 rgRaza.check(R.id.rbHobbit);
-            } else if (raza == CHECK_HUMANO) {
+            } else if (raza == Personaje.CHECK_HUMANO) {
                 rgRaza.check(R.id.rbHumano);
             }
         }
@@ -55,15 +49,15 @@ public class DialogoRaza extends DialogFragment {
                         int razaElegida;
 
                         if (raza == R.id.rbElfo) {
-                            razaElegida = CHECK_ELFO;
+                            razaElegida = Personaje.CHECK_ELFO;
                         } else if (raza == R.id.rbEnano) {
-                            razaElegida = CHECK_ENANO;
+                            razaElegida = Personaje.CHECK_ENANO;
                         } else if (raza == R.id.rbHobbit) {
-                            razaElegida = CHECK_HOBBIT;
+                            razaElegida = Personaje.CHECK_HOBBIT;
                         } else if (raza == R.id.rbHumano) {
-                            razaElegida = CHECK_HUMANO;
+                            razaElegida = Personaje.CHECK_HUMANO;
                         } else{
-                            razaElegida = CHECK_RAZA_SIN_ELEGIR;
+                            razaElegida = Personaje.CHECK_RAZA_SIN_ELEGIR;
                         }
                         listener.onDialogoRazaGuardarListener(razaElegida);
                     }

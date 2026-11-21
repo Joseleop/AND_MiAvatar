@@ -12,9 +12,9 @@ public class ActualizarBotones {
     }
 
     public static void actualizarBotonSexo(Button btnSexo, int sexo) {
-        if (sexo == DialogoSexo.CHECK_HOMBRE) {
+        if (sexo == Personaje.CHECK_HOMBRE) {
             btnSexo.setText(R.string.dialogo_sexo_hombre);
-        } else if (sexo == DialogoSexo.CHECK_MUJER) {
+        } else if (sexo == Personaje.CHECK_MUJER) {
             btnSexo.setText(R.string.dialogo_sexo_mujer);
         } else {
             btnSexo.setText(R.string.texto_boton_sexo);
@@ -22,13 +22,13 @@ public class ActualizarBotones {
     }
 
     public static void actualizarBotonRaza(Button btnRaza, int raza) {
-        if (raza == DialogoRaza.CHECK_ELFO) {
+        if (raza == Personaje.CHECK_ELFO) {
             btnRaza.setText(R.string.dialogo_raza_elfo);
-        } else if (raza == DialogoRaza.CHECK_ENANO) {
+        } else if (raza == Personaje.CHECK_ENANO) {
             btnRaza.setText(R.string.dialogo_raza_enano);
-        } else if (raza == DialogoRaza.CHECK_HOBBIT) {
+        } else if (raza == Personaje.CHECK_HOBBIT) {
             btnRaza.setText(R.string.dialogo_raza_hobbit);
-        } else if (raza == DialogoRaza.CHECK_HUMANO) {
+        } else if (raza == Personaje.CHECK_HUMANO) {
             btnRaza.setText(R.string.dialogo_raza_humano);
         } else {
             btnRaza.setText(R.string.texto_boton_raza);
@@ -37,15 +37,15 @@ public class ActualizarBotones {
 
 
     public static void actualizarBotonProfesion(Button btnProfesion, int profesion) {
-        if (profesion == DialogoProfesion.CHECK_ARQUERO) {
+        if (profesion == Personaje.CHECK_ARQUERO) {
             btnProfesion.setText(R.string.dialogo_profesion_arquero);
-        } else if (profesion == DialogoProfesion.CHECK_GUERRERO) {
+        } else if (profesion == Personaje.CHECK_GUERRERO) {
             btnProfesion.setText(R.string.dialogo_profesion_guerrero);
-        } else if (profesion == DialogoProfesion.CHECK_MAGO) {
+        } else if (profesion == Personaje.CHECK_MAGO) {
             btnProfesion.setText(R.string.dialogo_profesion_mago);
-        } else if (profesion == DialogoProfesion.CHECK_HERRERO) {
+        } else if (profesion == Personaje.CHECK_HERRERO) {
             btnProfesion.setText(R.string.dialogo_profesion_herrero);
-        } else if (profesion == DialogoProfesion.CHECK_MINERO) {
+        } else if (profesion == Personaje.CHECK_MINERO) {
             btnProfesion.setText(R.string.dialogo_profesion_minero);
         } else {
             btnProfesion.setText(R.string.texto_boton_profesion);
