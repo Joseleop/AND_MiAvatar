@@ -18,7 +18,7 @@ public class DialogoProfesion extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogoPergamino);
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogoProfesionInflado = inflater.inflate(R.layout.layout_dialogo_profesion, null);
         RadioGroup rgProfesion = dialogoProfesionInflado.findViewById(R.id.rgProfesion);

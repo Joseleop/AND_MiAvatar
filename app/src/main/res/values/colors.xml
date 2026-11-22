@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Paleta base -->
+    <color name="pergamino">#F2E3C0</color>
+    <color name="pergamino_oscuro">#E0C98F</color>
+    <color name="marron_oscuro">#3E2A1A</color>
+    <color name="marron_medio">#7A5230</color>
+    <color name="dorado">#B8860B</color>
+    <color name="rojo_sello">#8B2E2E</color>
 </resources>

@@ -1,8 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.MiAvatar" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/marron_medio</item>
+        <item name="colorOnPrimary">@color/pergamino</item>
+        <item name="colorSecondary">@color/dorado</item>
+        <item name="android:textColor">@color/marron_oscuro</item>
+        <item name="android:fontFamily">@font/uncial_antiqua</item>
     </style>
 
     <style name="Theme.MiAvatar" parent="Base.Theme.MiAvatar" />

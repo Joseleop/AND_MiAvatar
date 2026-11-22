@@ -21,7 +21,7 @@ public class DialogoNombre extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogoPergamino);
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogoNombreInflado = inflater.inflate(R.layout.layout_dialogo_nombre, null);

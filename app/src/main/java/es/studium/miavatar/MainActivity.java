@@ -1,11 +1,10 @@
 package es.studium.miavatar;
 
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -27,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     TextView tvMagia;
     TextView tvFuerza;
     TextView tvVelocidad;
+
+    ImageView ivAvatar;
 
     private final Personaje personaje = new Personaje();
 
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         tvMagia = findViewById(R.id.tvMagia);
         tvFuerza = findViewById(R.id.tvFuerza);
         tvVelocidad = findViewById(R.id.tvVelocidad);
+
+        ivAvatar = findViewById(R.id.ivAvatar);
 
         btnNombre.setOnClickListener(v -> {
             DialogoNombre dialogoNombre = new DialogoNombre();
@@ -136,6 +139,14 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
             tvMagia.setText(getString(R.string.texto_stats_magia, personaje.getMagia()));
             tvFuerza.setText(getString(R.string.texto_stats_fuerza, personaje.getFuerza()));
             tvVelocidad.setText(getString(R.string.texto_stats_velocidad, personaje.getVelocidad()));
+
+            String nombreAvatar = GeneradorNombreAvatar.nombreImagen(personaje);
+            int idImagen = getResources().getIdentifier(nombreAvatar, "drawable", getPackageName());
+            if (idImagen == 0){
+                idImagen = R.drawable.avatar_desconocido;
+            }
+            ivAvatar.setImageResource(idImagen);
+
             layoutFicha.setVisibility(View.VISIBLE);
         } else {
             layoutFicha.setVisibility(View.GONE);
