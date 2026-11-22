@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.fragment.app.DialogFragment;
 
@@ -15,20 +17,15 @@ public class DialogoReiniciar extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogoPergamino);
 
-        builder.setTitle(R.string.dialogo_reiniciar_titulo)
-                .setMessage(R.string.dialogo_reiniciar_mensaje)
-                .setPositiveButton(R.string.dialogo_aceptar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        listener.onDialogoReiniciarAceptarListener();
-                    }
-                })
-                .setNegativeButton(R.string.dialogo_cancelar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        listener.onDialogoReiniciarCancelarListener();
-                    }
-                });
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View vista = inflater.inflate(R.layout.layout_dialogo_reiniciar, null);
+
+        builder.setView(vista)
+                .setTitle(R.string.dialogo_reiniciar_titulo)
+                .setPositiveButton(R.string.dialogo_aceptar, (dialog, which) ->
+                        listener.onDialogoReiniciarAceptarListener())
+                .setNegativeButton(R.string.dialogo_cancelar, (dialog, which) ->
+                        listener.onDialogoReiniciarCancelarListener());
         return builder.create();
     }
 
