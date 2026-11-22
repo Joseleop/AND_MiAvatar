@@ -6,10 +6,10 @@
     <string name="texto_boton_raza">Raza</string>
     <string name="texto_boton_profesion">Profesión</string>
     <string name="texto_boton_reiniciar">Reiniciar</string>
-    <string name="texto_stats_vida">Vida:</string>
-    <string name="texto_stats_magia">Magia:</string>
-    <string name="texto_stats_fuerza">Fuerza:</string>
-    <string name="texto_stats_velocidad">Velocidad:</string>
+    <string name="texto_stats_vida">Vida: %1$d</string>
+    <string name="texto_stats_magia">Magia: %1$d</string>
+    <string name="texto_stats_fuerza">Fuerza: %1$d</string>
+    <string name="texto_stats_velocidad">Velocidad: %1$d</string>
     <!-- Diálogo general-->
     <string name="dialogo_aceptar">Aceptar</string>
     <string name="dialogo_cancelar">Cancelar</string>

@@ -24,6 +24,12 @@ public class Personaje {
     private int raza;
     private int profesion;
 
+    private int vida;
+    private int magia;
+    private int fuerza;
+    private int velocidad;
+    public static final int STAT_SIN_GENERAR = -1;
+
     public Personaje() {
         reiniciar();
     }
@@ -33,6 +39,10 @@ public class Personaje {
         sexo = CHECK_SEXO_SIN_ELEGIR;
         raza = CHECK_RAZA_SIN_ELEGIR;
         profesion = CHECK_PROFESION_SIN_ELEGIR;
+        vida = STAT_SIN_GENERAR;
+        magia = STAT_SIN_GENERAR;
+        fuerza = STAT_SIN_GENERAR;
+        velocidad = STAT_SIN_GENERAR;
     }
 
     public boolean estaCompleto() {
@@ -49,6 +59,45 @@ public class Personaje {
             return false;
         }
         return true;
+    }
+
+    public boolean tienePoderes() {
+        if (vida == STAT_SIN_GENERAR) {
+            return false;
+        }
+        if (magia == STAT_SIN_GENERAR) {
+            return false;
+        }
+        if (fuerza == STAT_SIN_GENERAR) {
+            return false;
+        }
+        if (velocidad == STAT_SIN_GENERAR) {
+            return false;
+        }
+        return true;
+    }
+
+    public void setPoderes(int vida, int magia, int fuerza, int velocidad) {
+        this.vida = vida;
+        this.magia = magia;
+        this.fuerza = fuerza;
+        this.velocidad = velocidad;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public int getMagia() {
+        return magia;
+    }
+
+    public int getFuerza() {
+        return fuerza;
+    }
+
+    public int getVelocidad() {
+        return velocidad;
     }
 
     public String getNombre() {

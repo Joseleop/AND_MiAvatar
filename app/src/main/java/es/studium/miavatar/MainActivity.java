@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -21,6 +23,11 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     View layoutFicha;
     Button btnReset;
 
+    TextView tvVida;
+    TextView tvMagia;
+    TextView tvFuerza;
+    TextView tvVelocidad;
+
     private final Personaje personaje = new Personaje();
 
     private static final String TAG_DIALOGO_NOMBRE = "dialogoNombre";
@@ -28,6 +35,11 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     private static final String TAG_DIALOGO_RAZA = "dialogoRaza";
     private static final String TAG_DIALOGO_PROFESION = "dialogoProfesion";
     private static final String TAG_DIALOGO_REINICIAR = "dialogoReiniciar";
+
+    private static final String KEY_VIDA_BUNDLE = "vida";
+    private static final String KEY_MAGIA_BUNDLE = "magia";
+    private static final String KEY_FUERZA_BUNDLE = "fuerza";
+    private static final String KEY_VELOCIDAD_BUNDLE = "velocidad";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +58,11 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
 
         layoutFicha = findViewById(R.id.layout_second);
         btnReset = findViewById(R.id.btnReset);
+
+        tvVida = findViewById(R.id.tvVida);
+        tvMagia = findViewById(R.id.tvMagia);
+        tvFuerza = findViewById(R.id.tvFuerza);
+        tvVelocidad = findViewById(R.id.tvVelocidad);
 
         btnNombre.setOnClickListener(v -> {
             DialogoNombre dialogoNombre = new DialogoNombre();
@@ -81,12 +98,17 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
             dialogoReiniciar.show(getSupportFragmentManager(), TAG_DIALOGO_REINICIAR);
         });
 
-        //Con esto pintamos los datos de cada botón tras girar el móvil
+        //Con esto guardamos los datos de cada botón (y del personaje) tras girar el móvil
         if (savedInstanceState != null) {
             personaje.setNombre(savedInstanceState.getString(DialogoNombre.KEY_NOMBRE_BUNDLE));
             personaje.setSexo(savedInstanceState.getInt(DialogoSexo.KEY_SEXO_BUNDLE, Personaje.CHECK_SEXO_SIN_ELEGIR));
             personaje.setRaza(savedInstanceState.getInt(DialogoRaza.KEY_RAZA_BUNDLE, Personaje.CHECK_RAZA_SIN_ELEGIR));
             personaje.setProfesion(savedInstanceState.getInt(DialogoProfesion.KEY_PROFESION_BUNDLE, Personaje.CHECK_PROFESION_SIN_ELEGIR));
+            int vidaBundle = savedInstanceState.getInt(KEY_VIDA_BUNDLE, Personaje.STAT_SIN_GENERAR);
+            int magiaBundle = savedInstanceState.getInt(KEY_MAGIA_BUNDLE, Personaje.STAT_SIN_GENERAR);
+            int fuerzaBundle = savedInstanceState.getInt(KEY_FUERZA_BUNDLE, Personaje.STAT_SIN_GENERAR);
+            int velocidadBundle = savedInstanceState.getInt(KEY_VELOCIDAD_BUNDLE, Personaje.STAT_SIN_GENERAR);
+            personaje.setPoderes(vidaBundle, magiaBundle, fuerzaBundle, velocidadBundle);
             ActualizarBotones.actualizarBotonNombre(btnNombre, personaje.getNombre());
             ActualizarBotones.actualizarBotonSexo(btnSexo, personaje.getSexo());
             ActualizarBotones.actualizarBotonRaza(btnRaza, personaje.getRaza());
@@ -107,6 +129,13 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
 
     private void actualizarFichaPersonaje() {
         if (personaje.estaCompleto()) {
+            if (!personaje.tienePoderes()) {
+                GeneradorPoderes.generarPoderes(personaje);
+            }
+            tvVida.setText(getString(R.string.texto_stats_vida, personaje.getVida()));
+            tvMagia.setText(getString(R.string.texto_stats_magia, personaje.getMagia()));
+            tvFuerza.setText(getString(R.string.texto_stats_fuerza, personaje.getFuerza()));
+            tvVelocidad.setText(getString(R.string.texto_stats_velocidad, personaje.getVelocidad()));
             layoutFicha.setVisibility(View.VISIBLE);
         } else {
             layoutFicha.setVisibility(View.GONE);
@@ -120,6 +149,10 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         outState.putInt(DialogoSexo.KEY_SEXO_BUNDLE, personaje.getSexo());
         outState.putInt(DialogoRaza.KEY_RAZA_BUNDLE, personaje.getRaza());
         outState.putInt(DialogoProfesion.KEY_PROFESION_BUNDLE, personaje.getProfesion());
+        outState.putInt(KEY_VIDA_BUNDLE, personaje.getVida());
+        outState.putInt(KEY_MAGIA_BUNDLE, personaje.getMagia());
+        outState.putInt(KEY_FUERZA_BUNDLE, personaje.getFuerza());
+        outState.putInt(KEY_VELOCIDAD_BUNDLE, personaje.getVelocidad());
     }
 
     @Override
