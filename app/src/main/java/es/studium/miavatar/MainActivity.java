@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     }
 
     private void actualizarFichaPersonaje() {
+        boolean estabaOculta = layoutFicha.getVisibility() != View.VISIBLE;
         if (personaje.estaCompleto()) {
             if (!personaje.tienePoderes()) {
                 GeneradorPoderes.generarPoderes(personaje);
@@ -152,12 +153,18 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
 
             String nombreAvatar = GeneradorNombreAvatar.nombreImagen(personaje);
             int idImagen = getResources().getIdentifier(nombreAvatar, "drawable", getPackageName());
-            if (idImagen == 0){
+            if (idImagen == 0) {
                 idImagen = R.drawable.avatar_desconocido;
             }
             ivAvatar.setImageResource(idImagen);
 
-            layoutFicha.setVisibility(View.VISIBLE);
+            if (estabaOculta) {
+                layoutFicha.setAlpha(0f);
+                layoutFicha.setVisibility(View.VISIBLE);
+                layoutFicha.animate().alpha(1f).setDuration(400);
+            } else {
+                layoutFicha.setVisibility(View.VISIBLE);
+            }
         } else {
             layoutFicha.setVisibility(View.GONE);
         }
