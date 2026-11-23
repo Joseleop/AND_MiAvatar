@@ -202,7 +202,10 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         if (razaElegida == Personaje.CHECK_RAZA_SIN_ELEGIR) {
             return;
         }
-        personaje.setRaza(razaElegida);
+        if (razaElegida != personaje.getRaza()) {
+            personaje.setRaza(razaElegida);
+            personaje.borrarPoderes();
+        }
         ActualizarBotones.actualizarBotonRaza(btnRaza, personaje.getRaza());
         actualizarFichaPersonaje();
     }
@@ -212,7 +215,11 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         if (profesionElegida == Personaje.CHECK_PROFESION_SIN_ELEGIR) {
             return;
         }
-        personaje.setProfesion(profesionElegida);
+
+        if (profesionElegida != personaje.getProfesion()) {
+            personaje.setProfesion(profesionElegida);
+            personaje.borrarPoderes();
+        }
         ActualizarBotones.actualizarBotonProfesion(btnProfesion, personaje.getProfesion());
         actualizarFichaPersonaje();
     }

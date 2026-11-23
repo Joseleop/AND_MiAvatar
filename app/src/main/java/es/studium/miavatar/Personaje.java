@@ -39,6 +39,10 @@ public class Personaje {
         sexo = CHECK_SEXO_SIN_ELEGIR;
         raza = CHECK_RAZA_SIN_ELEGIR;
         profesion = CHECK_PROFESION_SIN_ELEGIR;
+        borrarPoderes();
+    }
+
+    public void borrarPoderes(){
         vida = STAT_SIN_GENERAR;
         magia = STAT_SIN_GENERAR;
         fuerza = STAT_SIN_GENERAR;
