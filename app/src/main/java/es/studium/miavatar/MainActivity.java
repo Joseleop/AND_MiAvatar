@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     View layoutFicha;
     Button btnReset;
 
+    TextView tvNombreFicha;
+    TextView tvRazaProfesion;
     TextView tvVida;
     TextView tvMagia;
     TextView tvFuerza;
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
         layoutFicha = findViewById(R.id.layout_second);
         btnReset = findViewById(R.id.btnReset);
 
+        tvNombreFicha = findViewById(R.id.tvNombreFicha);
+        tvRazaProfesion = findViewById(R.id.tvRazaProfesion);
         tvVida = findViewById(R.id.tvVida);
         tvMagia = findViewById(R.id.tvMagia);
         tvFuerza = findViewById(R.id.tvFuerza);
@@ -135,6 +139,12 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
             if (!personaje.tienePoderes()) {
                 GeneradorPoderes.generarPoderes(personaje);
             }
+            tvNombreFicha.setText(personaje.getNombre());
+            tvRazaProfesion.setText(getString(
+                    R.string.ficha_raza_profesion,
+                    getString(ActualizarBotones.textoRaza(personaje.getRaza())),
+                    getString(ActualizarBotones.textoProfesion(personaje.getProfesion()))));
+
             tvVida.setText(getString(R.string.texto_stats_vida, personaje.getVida()));
             tvMagia.setText(getString(R.string.texto_stats_magia, personaje.getMagia()));
             tvFuerza.setText(getString(R.string.texto_stats_fuerza, personaje.getFuerza()));

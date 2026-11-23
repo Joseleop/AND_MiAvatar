@@ -13,6 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/dialogo_reiniciar_mensaje"
-        android:textSize="16sp" />
+        android:textSize="@dimen/texto_dialogo"/>
 
 </LinearLayout>

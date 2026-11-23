@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/dialogo_nombre_hint"
         android:inputType="textPersonName"
+        android:imeOptions="actionDone|flagNoExtractUi"
         android:maxLines="1" />
 
 </LinearLayout>

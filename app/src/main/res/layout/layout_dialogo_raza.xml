@@ -18,24 +18,28 @@
             android:id="@+id/rbElfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_dialogo"
             android:text="@string/dialogo_raza_elfo" />
 
         <RadioButton
             android:id="@+id/rbEnano"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_dialogo"
             android:text="@string/dialogo_raza_enano" />
 
         <RadioButton
             android:id="@+id/rbHobbit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_dialogo"
             android:text="@string/dialogo_raza_hobbit" />
 
         <RadioButton
             android:id="@+id/rbHumano"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_dialogo"
             android:text="@string/dialogo_raza_humano" />
 
     </RadioGroup>

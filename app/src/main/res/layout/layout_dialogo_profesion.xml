@@ -18,30 +18,36 @@
             android:id="@+id/rbArquero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_dialogo"
             android:text="@string/dialogo_profesion_arquero" />
+
 
         <RadioButton
             android:id="@+id/rbGuerrero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_dialogo"
             android:text="@string/dialogo_profesion_guerrero" />
 
         <RadioButton
             android:id="@+id/rbMago"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_dialogo"
             android:text="@string/dialogo_profesion_mago" />
 
         <RadioButton
             android:id="@+id/rbHerrero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_dialogo"
             android:text="@string/dialogo_profesion_herrero" />
 
         <RadioButton
             android:id="@+id/rbMinero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_dialogo"
             android:text="@string/dialogo_profesion_minero" />
 
     </RadioGroup>

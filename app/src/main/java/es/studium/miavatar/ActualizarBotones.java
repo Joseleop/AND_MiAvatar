@@ -35,7 +35,6 @@ public class ActualizarBotones {
         }
     }
 
-
     public static void actualizarBotonProfesion(Button btnProfesion, int profesion) {
         if (profesion == Personaje.CHECK_ARQUERO) {
             btnProfesion.setText(R.string.dialogo_profesion_arquero);
@@ -49,6 +48,32 @@ public class ActualizarBotones {
             btnProfesion.setText(R.string.dialogo_profesion_minero);
         } else {
             btnProfesion.setText(R.string.texto_boton_profesion);
+        }
+    }
+
+    public static int textoRaza(int raza) {
+        if (raza == Personaje.CHECK_ELFO) {
+            return R.string.dialogo_raza_elfo;
+        } else if (raza == Personaje.CHECK_ENANO) {
+            return R.string.dialogo_raza_enano;
+        } else if (raza == Personaje.CHECK_HOBBIT) {
+            return R.string.dialogo_raza_hobbit;
+        } else {
+            return R.string.dialogo_raza_humano;
+        }
+    }
+
+    public static int textoProfesion(int profesion) {
+        if (profesion == Personaje.CHECK_ARQUERO) {
+            return R.string.dialogo_profesion_arquero;
+        } else if (profesion == Personaje.CHECK_GUERRERO) {
+            return R.string.dialogo_profesion_guerrero;
+        } else if (profesion == Personaje.CHECK_MAGO) {
+            return R.string.dialogo_profesion_mago;
+        } else if (profesion == Personaje.CHECK_HERRERO) {
+            return R.string.dialogo_profesion_herrero;
+        } else {
+            return R.string.dialogo_profesion_minero;
         }
     }
 }

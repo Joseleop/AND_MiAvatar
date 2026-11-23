@@ -7,6 +7,7 @@
         <item name="android:ellipsize">end</item>
         <item name="android:letterSpacing">0</item>
         <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/texto_boton</item>
         <item name="android:textColor">@color/marron_oscuro</item>
         <item name="backgroundTint">@color/pergamino_oscuro</item>
         <item name="strokeColor">@color/marron_medio</item>
@@ -14,7 +15,13 @@
         <item name="cornerRadius">10dp</item>
     </style>
 
-    <!-- Estilo del diálogo -->
+    <style name="Boton_reiniciar" parent="Boton_de_datos">
+        <item name="backgroundTint">@color/rojo_sello</item>
+        <item name="android:textColor">@color/pergamino</item>
+        <item name="strokeColor">@color/marron_oscuro</item>
+    </style>
+
+    <!-- Estilo del diálogo (pergamino) -->
     <style name="DialogoPergamino" parent="android:Theme.Material.Light.Dialog.Alert">
         <item name="android:windowBackground">@drawable/fondo_pergamino</item>
         <item name="android:textColorPrimary">@color/marron_oscuro</item>

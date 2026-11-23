@@ -6,6 +6,9 @@
     <string name="texto_boton_raza">Raza</string>
     <string name="texto_boton_profesion">Profesión</string>
     <string name="texto_boton_reiniciar">Reiniciar</string>
+
+    <string name="texto_ficha_nombre">%1$s</string>
+    <string name="ficha_raza_profesion">%1$s · %2$s</string>
     <string name="texto_stats_vida">Vida: %1$d</string>
     <string name="texto_stats_magia">Magia: %1$d</string>
     <string name="texto_stats_fuerza">Fuerza: %1$d</string>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="boton_datos_ancho">160dp</dimen>
+    <dimen name="boton_datos_alto">44dp</dimen>
+
+    <dimen name="texto_titulo">22sp</dimen>
+    <dimen name="texto_boton">16sp</dimen>
+    <dimen name="texto_stat">16sp</dimen>
+    <dimen name="texto_ficha_nombre">25sp</dimen>
+    <dimen name="texto_ficha_subtitulo">22sp</dimen>
+</resources>

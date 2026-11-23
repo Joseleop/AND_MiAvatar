@@ -2,4 +2,12 @@
 <resources>
     <dimen name="boton_datos_ancho">150dp</dimen>
     <dimen name="boton_datos_alto">60dp</dimen>
+
+
+    <dimen name="texto_titulo">26sp</dimen>
+    <dimen name="texto_boton">18sp</dimen>
+    <dimen name="texto_stat">20sp</dimen>
+    <dimen name="texto_ficha_nombre">32sp</dimen>
+    <dimen name="texto_ficha_subtitulo">20sp</dimen>
+    <dimen name="texto_dialogo">20sp</dimen>
 </resources>

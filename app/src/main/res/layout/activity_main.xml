@@ -8,151 +8,194 @@
     android:background="@drawable/bgimg"
     tools:context=".MainActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaCentro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaSuperior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
+
     <TextView
         android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_titulo_ficha"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/texto_titulo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.073" />
+        app:layout_constraintTop_toBottomOf="@id/guiaSuperior" />
 
+    <!-- Fila 1 -->
     <Button
         android:id="@+id/btnNombre"
         style="@style/Boton_de_datos"
+        android:layout_marginTop="32dp"
         android:text="@string/texto_boton_nombre"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
+        app:layout_constraintEnd_toStartOf="@id/guiaCentro"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.175" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo" />
 
     <Button
         android:id="@+id/btnRaza"
         style="@style/Boton_de_datos"
         android:text="@string/texto_boton_raza"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174" />
+        app:layout_constraintStart_toEndOf="@id/guiaCentro"
+        app:layout_constraintTop_toTopOf="@id/btnNombre" />
 
+    <!-- Fila 2 -->
     <Button
         android:id="@+id/btnSexo"
         style="@style/Boton_de_datos"
+        android:layout_marginTop="24dp"
         android:text="@string/texto_boton_sexo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintEnd_toStartOf="@id/guiaCentro"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintTop_toBottomOf="@id/btnNombre" />
 
     <Button
         android:id="@+id/btnProfesion"
         style="@style/Boton_de_datos"
         android:text="@string/texto_boton_profesion"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintStart_toEndOf="@id/guiaCentro"
+        app:layout_constraintTop_toTopOf="@id/btnSexo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_second"
-        android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/fondo_pergamino"
         android:padding="16dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guiaColumnas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/tvNombreFicha"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/marron_oscuro"
+            android:textSize="@dimen/texto_ficha_nombre"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvRazaProfesion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/dorado"
+            android:textSize="@dimen/texto_ficha_subtitulo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvNombreFicha" />
+
+        <View
+            android:id="@+id/divisorFicha"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/marron_medio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRazaProfesion" />
+
+        <!-- Avatar centrado en la mitad izquierda -->
         <ImageView
             android:id="@+id/ivAvatar"
-            android:layout_width="194dp"
-            android:layout_height="280dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintDimensionRatio="H,25:36"
+            app:layout_constraintEnd_toStartOf="@id/guiaColumnas"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintTop_toBottomOf="@id/divisorFicha" />
 
-        <TextView
-            android:id="@+id/tvVida"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_vida"
-            android:drawablePadding="10dp"
-            android:text="@string/texto_stats_vida"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <!-- Stats centrados en la mitad derecha -->
+        <LinearLayout
+            android:id="@+id/columnaStats"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.75"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2" />
+            app:layout_constraintStart_toEndOf="@id/guiaColumnas"
+            app:layout_constraintTop_toTopOf="@id/ivAvatar">
 
-        <TextView
-            android:id="@+id/tvMagia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_magia"
-            android:drawablePadding="10dp"
-            android:text="@string/texto_stats_magia"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.78"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.337" />
+            <TextView
+                android:id="@+id/tvVida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:drawableStart="@drawable/ic_vida"
+                android:drawablePadding="10dp"
+                android:text="@string/texto_stats_vida"
+                android:textSize="@dimen/texto_stat" />
 
-        <TextView
-            android:id="@+id/tvFuerza"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_fuerza"
-            android:drawablePadding="10dp"
-            android:text="@string/texto_stats_fuerza"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.803"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.464" />
+            <TextView
+                android:id="@+id/tvMagia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:drawableStart="@drawable/ic_magia"
+                android:drawablePadding="10dp"
+                android:text="@string/texto_stats_magia"
+                android:textSize="@dimen/texto_stat" />
 
-        <TextView
-            android:id="@+id/tvVelocidad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_velocidad"
-            android:drawablePadding="10dp"
-            android:text="@string/texto_stats_velocidad"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.865"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.6" />
+            <TextView
+                android:id="@+id/tvFuerza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:drawableStart="@drawable/ic_fuerza"
+                android:drawablePadding="10dp"
+                android:text="@string/texto_stats_fuerza"
+                android:textSize="@dimen/texto_stat" />
+
+            <TextView
+                android:id="@+id/tvVelocidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_velocidad"
+                android:drawablePadding="10dp"
+                android:text="@string/texto_stats_velocidad"
+                android:textSize="@dimen/texto_stat" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnReset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Boton_reiniciar"
+            android:layout_marginTop="16dp"
             android:text="@string/texto_boton_reiniciar"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.872" />
+            app:layout_constraintTop_toBottomOf="@id/ivAvatar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

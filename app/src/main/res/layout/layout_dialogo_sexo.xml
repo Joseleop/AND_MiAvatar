@@ -18,12 +18,14 @@
             android:id="@+id/rbHombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_dialogo"
             android:text="@string/dialogo_sexo_hombre" />
 
         <RadioButton
             android:id="@+id/rbMujer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_dialogo"
             android:text="@string/dialogo_sexo_mujer" />
 
     </RadioGroup>
