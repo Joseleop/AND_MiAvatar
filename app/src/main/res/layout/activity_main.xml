@@ -189,12 +189,21 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnTirar"
+            style="@style/Boton_de_datos"
+            android:layout_marginTop="16dp"
+            android:text="@string/texto_boton_tirar"
+            app:layout_constraintEnd_toStartOf="@id/guiaColumnas"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivAvatar" />
+
+        <Button
             android:id="@+id/btnReset"
             style="@style/Boton_reiniciar"
             android:layout_marginTop="16dp"
             android:text="@string/texto_boton_reiniciar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guiaColumnas"
             app:layout_constraintTop_toBottomOf="@id/ivAvatar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

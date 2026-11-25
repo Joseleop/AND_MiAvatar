@@ -15,6 +15,7 @@ public class DialogoAdvertencia extends DialogFragment {
     public static final String KEY_VALOR_BUNDLE = "valor";
     public static final int CAMBIO_RAZA = 1;
     public static final int CAMBIO_PROFESION = 2;
+    public static final int TIRAR_PODERES = 3;
 
     private OnDialogoListener listener;
 

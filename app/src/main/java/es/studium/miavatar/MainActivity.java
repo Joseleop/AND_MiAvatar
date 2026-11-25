@@ -14,22 +14,23 @@ import androidx.fragment.app.DialogFragment;
 
 public class MainActivity extends AppCompatActivity implements OnDialogoListener {
 
-    Button btnNombre;
-    Button btnSexo;
-    Button btnRaza;
-    Button btnProfesion;
+    private Button btnNombre;
+    private Button btnSexo;
+    private Button btnRaza;
+    private Button btnProfesion;
 
-    View layoutFicha;
-    Button btnReset;
+    private View layoutFicha;
+    private Button btnReset;
+    private Button btnTirar;
 
-    TextView tvNombreFicha;
-    TextView tvRazaProfesion;
-    TextView tvVida;
-    TextView tvMagia;
-    TextView tvFuerza;
-    TextView tvVelocidad;
+    private TextView tvNombreFicha;
+    private TextView tvRazaProfesion;
+    private TextView tvVida;
+    private TextView tvMagia;
+    private TextView tvFuerza;
+    private TextView tvVelocidad;
 
-    ImageView ivAvatar;
+    private ImageView ivAvatar;
 
     private final Personaje personaje = new Personaje();
 
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
 
         layoutFicha = findViewById(R.id.layout_second);
         btnReset = findViewById(R.id.btnReset);
+        btnTirar = findViewById(R.id.btnTirar);
 
         tvNombreFicha = findViewById(R.id.tvNombreFicha);
         tvRazaProfesion = findViewById(R.id.tvRazaProfesion);
@@ -101,6 +103,10 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
             DialogoReiniciar dialogoReiniciar = new DialogoReiniciar();
             abrirDialogo(dialogoReiniciar, TAG_DIALOGO_REINICIAR);
         });
+
+        btnTirar.setOnClickListener(v ->
+            pedirConfirmacionCambio(DialogoAdvertencia.TIRAR_PODERES, 0
+        ));
 
         if (savedInstanceState != null) {
             restaurarEstado(savedInstanceState);
@@ -298,7 +304,13 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
             aplicarRaza(valor);
         } else if (tipo == DialogoAdvertencia.CAMBIO_PROFESION) {
             aplicarProfesion(valor);
+        } else if (tipo == DialogoAdvertencia.TIRAR_PODERES) {
+            tirarPoderes();
         }
+    }
+    private void tirarPoderes() {
+        personaje.borrarPoderes();
+        actualizarFichaPersonaje();
     }
 
     private void aplicarRaza(int raza) {

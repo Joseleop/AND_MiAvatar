@@ -6,6 +6,7 @@
     <string name="texto_boton_raza">Raza</string>
     <string name="texto_boton_profesion">Profesión</string>
     <string name="texto_boton_reiniciar">Reiniciar</string>
+    <string name="texto_boton_tirar">Generar</string>
 
     <string name="texto_ficha_nombre">%1$s</string>
     <string name="ficha_raza_profesion">%1$s · %2$s</string>
@@ -43,5 +44,5 @@
 
     <!-- Diálogo advertencia -->
     <string name="dialogo_advertencia_titulo">¿Cambiar el personaje?</string>
-    <string name="dialogo_advertencia_mensaje">Si cambias la raza o la profesión se perderán los stats y se generarán otros nuevos.</string>
+    <string name="dialogo_advertencia_mensaje">Se van a generar nuevos stats. ¿Quieres continuar?</string>
 </resources>
