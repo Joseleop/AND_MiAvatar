@@ -29,6 +29,8 @@ public class GeneradorPoderes {
     private static final int[] PLUS_HERRERO = {5, -2, 5, -1};
     private static final int[] PLUS_MINERO = {15, -2, 3, -2};
 
+    private static final int[] SIN_PLUS = {0, 0, 0, 0};
+
     public static void generarPoderes(Personaje personaje) {
         // 1. Valor base aleatorio
         int vida = valorAleatorio(MAX_VIDA);
@@ -53,9 +55,14 @@ public class GeneradorPoderes {
         return random.nextInt(max + 1);
     }
 
-    // Deja el valor entre 0 y el máximo
     private static int limitar(int valor, int max) {
-        return Math.max(0, Math.min(valor, max));
+        if (valor < 0) {
+            return 0;
+        }
+        if (valor > max) {
+            return max;
+        }
+        return valor;
     }
 
     private static int[] plusPorRaza(int raza) {
@@ -65,8 +72,10 @@ public class GeneradorPoderes {
             return PLUS_ENANO;
         } else if (raza == Personaje.CHECK_HOBBIT) {
             return PLUS_HOBBIT;
-        } else {
+        } else if (raza == Personaje.CHECK_HUMANO) {
             return PLUS_HUMANO;
+        } else {
+            return SIN_PLUS;
         }
     }
 
@@ -79,8 +88,10 @@ public class GeneradorPoderes {
             return PLUS_MAGO;
         } else if (profesion == Personaje.CHECK_HERRERO) {
             return PLUS_HERRERO;
-        } else {
+        } else if (profesion == Personaje.CHECK_MINERO) {
             return PLUS_MINERO;
+        } else {
+            return SIN_PLUS;
         }
     }
 }

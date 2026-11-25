@@ -43,6 +43,10 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     private static final String KEY_MAGIA_BUNDLE = "magia";
     private static final String KEY_FUERZA_BUNDLE = "fuerza";
     private static final String KEY_VELOCIDAD_BUNDLE = "velocidad";
+    private static final String KEY_NOMBRE_BUNDLE = "nombre";
+    private static final String KEY_SEXO_BUNDLE = "sexo";
+    private static final String KEY_RAZA_BUNDLE = "raza";
+    private static final String KEY_PROFESION_BUNDLE = "profesion";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,59 +77,76 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
 
         btnNombre.setOnClickListener(v -> {
             DialogoNombre dialogoNombre = new DialogoNombre();
-            dialogoNombre.setCancelable(false);
-            crearBundle(dialogoNombre);
-            dialogoNombre.show(getSupportFragmentManager(), TAG_DIALOGO_NOMBRE);
+            abrirDialogo(dialogoNombre, TAG_DIALOGO_NOMBRE);
         });
 
         btnSexo.setOnClickListener(v -> {
             DialogoSexo dialogoSexo = new DialogoSexo();
-            dialogoSexo.setCancelable(false);
-            crearBundle(dialogoSexo);
-            dialogoSexo.show(getSupportFragmentManager(), TAG_DIALOGO_SEXO);
+            abrirDialogo(dialogoSexo, TAG_DIALOGO_SEXO);
         });
 
         btnRaza.setOnClickListener(v -> {
             DialogoRaza dialogoRaza = new DialogoRaza();
-            dialogoRaza.setCancelable(false);
-            crearBundle(dialogoRaza);
-            dialogoRaza.show(getSupportFragmentManager(), TAG_DIALOGO_RAZA);
+            abrirDialogo(dialogoRaza, TAG_DIALOGO_RAZA);
         });
 
         btnProfesion.setOnClickListener(v -> {
             DialogoProfesion dialogoProfesion = new DialogoProfesion();
-            dialogoProfesion.setCancelable(false);
-            crearBundle(dialogoProfesion);
-            dialogoProfesion.show(getSupportFragmentManager(), TAG_DIALOGO_PROFESION);
+            abrirDialogo(dialogoProfesion, TAG_DIALOGO_PROFESION);
         });
 
         btnReset.setOnClickListener(v -> {
             DialogoReiniciar dialogoReiniciar = new DialogoReiniciar();
-            dialogoReiniciar.setCancelable(false);
-            dialogoReiniciar.show(getSupportFragmentManager(), TAG_DIALOGO_REINICIAR);
+            abrirDialogo(dialogoReiniciar, TAG_DIALOGO_REINICIAR);
         });
 
-        //Con esto guardamos los datos de cada botón (y del personaje) tras girar el móvil
         if (savedInstanceState != null) {
-            personaje.setNombre(savedInstanceState.getString(DialogoNombre.KEY_NOMBRE_BUNDLE));
-            personaje.setSexo(savedInstanceState.getInt(DialogoSexo.KEY_SEXO_BUNDLE, Personaje.CHECK_SEXO_SIN_ELEGIR));
-            personaje.setRaza(savedInstanceState.getInt(DialogoRaza.KEY_RAZA_BUNDLE, Personaje.CHECK_RAZA_SIN_ELEGIR));
-            personaje.setProfesion(savedInstanceState.getInt(DialogoProfesion.KEY_PROFESION_BUNDLE, Personaje.CHECK_PROFESION_SIN_ELEGIR));
-            int vidaBundle = savedInstanceState.getInt(KEY_VIDA_BUNDLE, Personaje.STAT_SIN_GENERAR);
-            int magiaBundle = savedInstanceState.getInt(KEY_MAGIA_BUNDLE, Personaje.STAT_SIN_GENERAR);
-            int fuerzaBundle = savedInstanceState.getInt(KEY_FUERZA_BUNDLE, Personaje.STAT_SIN_GENERAR);
-            int velocidadBundle = savedInstanceState.getInt(KEY_VELOCIDAD_BUNDLE, Personaje.STAT_SIN_GENERAR);
-            personaje.setPoderes(vidaBundle, magiaBundle, fuerzaBundle, velocidadBundle);
-            ActualizarBotones.actualizarBotonNombre(btnNombre, personaje.getNombre());
-            ActualizarBotones.actualizarBotonSexo(btnSexo, personaje.getSexo());
-            ActualizarBotones.actualizarBotonRaza(btnRaza, personaje.getRaza());
-            ActualizarBotones.actualizarBotonProfesion(btnProfesion, personaje.getProfesion());
+            restaurarEstado(savedInstanceState);
+            repintarBotones();
             actualizarFichaPersonaje();
         }
     }
 
+    private void abrirDialogo(DialogFragment dialog, String tag) {
+        dialog.setCancelable(false);
+        enviarArgumentosAlDialogo(dialog);
+        dialog.show(getSupportFragmentManager(), tag);
+    }
+
+    private void repintarBotones() {
+        ActualizarBotones.actualizarBotonNombre(btnNombre, personaje.getNombre());
+        ActualizarBotones.actualizarBotonSexo(btnSexo, personaje.getSexo());
+        ActualizarBotones.actualizarBotonRaza(btnRaza, personaje.getRaza());
+        ActualizarBotones.actualizarBotonProfesion(btnProfesion, personaje.getProfesion());
+    }
+
+    //Con esto restauramos los datos de cada botón (y del personaje) para girar el móvil
+    private void restaurarEstado(Bundle savedInstanceState) {
+        personaje.setNombre(savedInstanceState.getString(KEY_NOMBRE_BUNDLE));
+        personaje.setSexo(savedInstanceState.getInt(KEY_SEXO_BUNDLE, Personaje.CHECK_SEXO_SIN_ELEGIR));
+        personaje.setRaza(savedInstanceState.getInt(KEY_RAZA_BUNDLE, Personaje.CHECK_RAZA_SIN_ELEGIR));
+        personaje.setProfesion(savedInstanceState.getInt(KEY_PROFESION_BUNDLE, Personaje.CHECK_PROFESION_SIN_ELEGIR));
+        int vidaBundle = savedInstanceState.getInt(KEY_VIDA_BUNDLE, Personaje.STAT_SIN_GENERAR);
+        int magiaBundle = savedInstanceState.getInt(KEY_MAGIA_BUNDLE, Personaje.STAT_SIN_GENERAR);
+        int fuerzaBundle = savedInstanceState.getInt(KEY_FUERZA_BUNDLE, Personaje.STAT_SIN_GENERAR);
+        int velocidadBundle = savedInstanceState.getInt(KEY_VELOCIDAD_BUNDLE, Personaje.STAT_SIN_GENERAR);
+        personaje.setPoderes(vidaBundle, magiaBundle, fuerzaBundle, velocidadBundle);
+    }
+
+    private void guardarEstado(Bundle outState) {
+        outState.putString(KEY_NOMBRE_BUNDLE, personaje.getNombre());
+        outState.putInt(KEY_SEXO_BUNDLE, personaje.getSexo());
+        outState.putInt(KEY_RAZA_BUNDLE, personaje.getRaza());
+        outState.putInt(KEY_PROFESION_BUNDLE, personaje.getProfesion());
+
+        outState.putInt(KEY_VIDA_BUNDLE, personaje.getVida());
+        outState.putInt(KEY_MAGIA_BUNDLE, personaje.getMagia());
+        outState.putInt(KEY_FUERZA_BUNDLE, personaje.getFuerza());
+        outState.putInt(KEY_VELOCIDAD_BUNDLE, personaje.getVelocidad());
+    }
+
     //Este bundle es el que sirve para llevar los datos si están rellenos al diálogo
-    private void crearBundle(DialogFragment dialogoAbierto) {
+    private void enviarArgumentosAlDialogo(DialogFragment dialogoAbierto) {
         Bundle bundle = new Bundle();
         bundle.putString(DialogoNombre.KEY_NOMBRE_BUNDLE, personaje.getNombre());
         bundle.putInt(DialogoSexo.KEY_SEXO_BUNDLE, personaje.getSexo());
@@ -135,52 +156,53 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     }
 
     private void actualizarFichaPersonaje() {
-        boolean estabaOculta = layoutFicha.getVisibility() != View.VISIBLE;
         if (personaje.estaCompleto()) {
             if (!personaje.tienePoderes()) {
                 GeneradorPoderes.generarPoderes(personaje);
             }
-            tvNombreFicha.setText(personaje.getNombre());
-            tvRazaProfesion.setText(getString(
-                    R.string.ficha_raza_profesion,
-                    getString(ActualizarBotones.textoRaza(personaje.getRaza())),
-                    getString(ActualizarBotones.textoProfesion(personaje.getProfesion()))));
-
-            tvVida.setText(getString(R.string.texto_stats_vida, personaje.getVida()));
-            tvMagia.setText(getString(R.string.texto_stats_magia, personaje.getMagia()));
-            tvFuerza.setText(getString(R.string.texto_stats_fuerza, personaje.getFuerza()));
-            tvVelocidad.setText(getString(R.string.texto_stats_velocidad, personaje.getVelocidad()));
-
-            String nombreAvatar = GeneradorNombreAvatar.nombreImagen(personaje);
-            int idImagen = getResources().getIdentifier(nombreAvatar, "drawable", getPackageName());
-            if (idImagen == 0) {
-                idImagen = R.drawable.avatar_desconocido;
-            }
-            ivAvatar.setImageResource(idImagen);
-
-            if (estabaOculta) {
-                layoutFicha.setAlpha(0f);
-                layoutFicha.setVisibility(View.VISIBLE);
-                layoutFicha.animate().alpha(1f).setDuration(400);
-            } else {
-                layoutFicha.setVisibility(View.VISIBLE);
-            }
-        } else {
+            pintarDatosEnFicha();
+            pintarAvatarEnFicha();
+            mostrarFicha();
+        } else{
             layoutFicha.setVisibility(View.GONE);
+        }
+    }
+
+    private void pintarDatosEnFicha() {
+        tvNombreFicha.setText(personaje.getNombre());
+        tvRazaProfesion.setText(getString(
+                R.string.ficha_raza_profesion,
+                getString(ActualizarBotones.textoRaza(personaje.getRaza())),
+                getString(ActualizarBotones.textoProfesion(personaje.getProfesion()))));
+
+        tvVida.setText(getString(R.string.texto_stats_vida, personaje.getVida()));
+        tvMagia.setText(getString(R.string.texto_stats_magia, personaje.getMagia()));
+        tvFuerza.setText(getString(R.string.texto_stats_fuerza, personaje.getFuerza()));
+        tvVelocidad.setText(getString(R.string.texto_stats_velocidad, personaje.getVelocidad()));
+    }
+
+    private void pintarAvatarEnFicha() {
+        String nombreAvatar = GeneradorNombreAvatar.nombreImagen(personaje);
+        int idImagen = getResources().getIdentifier(nombreAvatar, "drawable", getPackageName());
+        if (idImagen == 0) {
+            idImagen = R.drawable.avatar_desconocido;
+        }
+        ivAvatar.setImageResource(idImagen);
+    }
+
+    private void mostrarFicha(){
+        boolean estaOculta = layoutFicha.getVisibility() != View.VISIBLE;
+        if (estaOculta) {
+            layoutFicha.setAlpha(0f);
+            layoutFicha.setVisibility(View.VISIBLE);
+            layoutFicha.animate().alpha(1f).setDuration(400);
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(DialogoNombre.KEY_NOMBRE_BUNDLE, personaje.getNombre());
-        outState.putInt(DialogoSexo.KEY_SEXO_BUNDLE, personaje.getSexo());
-        outState.putInt(DialogoRaza.KEY_RAZA_BUNDLE, personaje.getRaza());
-        outState.putInt(DialogoProfesion.KEY_PROFESION_BUNDLE, personaje.getProfesion());
-        outState.putInt(KEY_VIDA_BUNDLE, personaje.getVida());
-        outState.putInt(KEY_MAGIA_BUNDLE, personaje.getMagia());
-        outState.putInt(KEY_FUERZA_BUNDLE, personaje.getFuerza());
-        outState.putInt(KEY_VELOCIDAD_BUNDLE, personaje.getVelocidad());
+        guardarEstado(outState);
     }
 
     @Override
@@ -235,10 +257,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     @Override
     public void onDialogoReiniciarAceptarListener() {
         personaje.reiniciar();
-        ActualizarBotones.actualizarBotonNombre(btnNombre, personaje.getNombre());
-        ActualizarBotones.actualizarBotonSexo(btnSexo, personaje.getSexo());
-        ActualizarBotones.actualizarBotonRaza(btnRaza, personaje.getRaza());
-        ActualizarBotones.actualizarBotonProfesion(btnProfesion, personaje.getProfesion());
+        repintarBotones();
         actualizarFichaPersonaje();
     }
 

@@ -23,9 +23,9 @@ public class DialogoProfesion extends DialogFragment {
         View dialogoProfesionInflado = inflater.inflate(R.layout.layout_dialogo_profesion, null);
         RadioGroup rgProfesion = dialogoProfesionInflado.findViewById(R.id.rgProfesion);
 
-        Bundle arguments = getArguments();
-        if(arguments != null){
-            int profesion = arguments.getInt(KEY_PROFESION_BUNDLE, Personaje.CHECK_PROFESION_SIN_ELEGIR);
+        Bundle argumentos = getArguments();
+        if(argumentos != null){
+            int profesion = argumentos.getInt(KEY_PROFESION_BUNDLE, Personaje.CHECK_PROFESION_SIN_ELEGIR);
 
             if(profesion == Personaje.CHECK_ARQUERO){
                 rgProfesion.check(R.id.rbArquero);
