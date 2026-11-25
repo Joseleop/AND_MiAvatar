@@ -16,4 +16,7 @@ public interface OnDialogoListener {
     void onDialogoReiniciarAceptarListener();
 
     void onDialogoReiniciarCancelarListener();
+
+    void onDialogoAdvertenciaAceptarListener(int tipo, int valor);
+    void onDialogoAdvertenciaCancelarListener();
 }

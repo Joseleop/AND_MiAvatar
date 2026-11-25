@@ -39,5 +39,9 @@
     <string name="dialogo_profesion_minero">Minero</string>
     <!-- Diálogo reiniciar -->
     <string name="dialogo_reiniciar_titulo">¿Reiniciar personaje?</string>
-    <string name="dialogo_reiniciar_mensaje">Se borrarán todos los datos de tu personaje.</string>
+    <string name="dialogo_reiniciar_mensaje">Se borrarán todos los stats de tu personaje.</string>
+
+    <!-- Diálogo advertencia -->
+    <string name="dialogo_advertencia_titulo">¿Cambiar el personaje?</string>
+    <string name="dialogo_advertencia_mensaje">Si cambias la raza o la profesión se perderán los stats y se generarán otros nuevos.</string>
 </resources>

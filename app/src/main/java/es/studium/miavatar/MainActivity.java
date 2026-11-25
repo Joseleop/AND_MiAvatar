@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
     private static final String TAG_DIALOGO_RAZA = "dialogoRaza";
     private static final String TAG_DIALOGO_PROFESION = "dialogoProfesion";
     private static final String TAG_DIALOGO_REINICIAR = "dialogoReiniciar";
+    private static final String TAG_DIALOGO_ADVERTENCIA = "dialogoAdvertencia";
+
 
     private static final String KEY_VIDA_BUNDLE = "vida";
     private static final String KEY_MAGIA_BUNDLE = "magia";
@@ -198,8 +200,18 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
             layoutFicha.animate().alpha(1f).setDuration(400);
         }
     }
+    private void pedirConfirmacionCambio(int tipo, int valor) {
+        Bundle argumentos = new Bundle();
+        argumentos.putInt(DialogoAdvertencia.KEY_TIPO_BUNDLE, tipo);
+        argumentos.putInt(DialogoAdvertencia.KEY_VALOR_BUNDLE, valor);
 
-    @Override
+        DialogoAdvertencia dialogo = new DialogoAdvertencia();
+        dialogo.setArguments(argumentos);
+        dialogo.setCancelable(false);
+        dialogo.show(getSupportFragmentManager(), TAG_DIALOGO_ADVERTENCIA);
+    }
+
+        @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         guardarEstado(outState);
@@ -228,28 +240,31 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
 
     @Override
     public void onDialogoRazaGuardarListener(int razaElegida) {
-        if (razaElegida == Personaje.CHECK_RAZA_SIN_ELEGIR) {
+        if (razaElegida == Personaje.CHECK_RAZA_SIN_ELEGIR || razaElegida == personaje.getRaza()) {
             return;
         }
-        if (razaElegida != personaje.getRaza()) {
-            personaje.setRaza(razaElegida);
-            personaje.borrarPoderes();
+        if (personaje.tienePoderes()) {
+            pedirConfirmacionCambio(DialogoAdvertencia.CAMBIO_RAZA, razaElegida);
+        } else {
+            aplicarRaza(razaElegida);
         }
-        ActualizarBotones.actualizarBotonRaza(btnRaza, personaje.getRaza());
-        actualizarFichaPersonaje();
     }
 
     @Override
     public void onDialogoProfesionGuardarListener(int profesionElegida) {
-        if (profesionElegida == Personaje.CHECK_PROFESION_SIN_ELEGIR) {
+        if (profesionElegida == Personaje.CHECK_PROFESION_SIN_ELEGIR || profesionElegida == personaje.getProfesion()) {
             return;
         }
-
-        if (profesionElegida != personaje.getProfesion()) {
-            personaje.setProfesion(profesionElegida);
-            personaje.borrarPoderes();
+        if (personaje.tienePoderes()) {
+            pedirConfirmacionCambio(DialogoAdvertencia.CAMBIO_PROFESION, profesionElegida);
+        } else {
+            aplicarProfesion(profesionElegida);
         }
-        ActualizarBotones.actualizarBotonProfesion(btnProfesion, personaje.getProfesion());
+    }
+    private void aplicarProfesion(int profesion) {
+        personaje.setProfesion(profesion);
+        personaje.borrarPoderes();
+        ActualizarBotones.actualizarBotonProfesion(btnProfesion, profesion);
         actualizarFichaPersonaje();
     }
 
@@ -276,5 +291,24 @@ public class MainActivity extends AppCompatActivity implements OnDialogoListener
 
     @Override
     public void onDialogoReiniciarCancelarListener() {}
+
+    @Override
+    public void onDialogoAdvertenciaAceptarListener(int tipo, int valor) {
+        if (tipo == DialogoAdvertencia.CAMBIO_RAZA) {
+            aplicarRaza(valor);
+        } else if (tipo == DialogoAdvertencia.CAMBIO_PROFESION) {
+            aplicarProfesion(valor);
+        }
+    }
+
+    private void aplicarRaza(int raza) {
+        personaje.setRaza(raza);
+        personaje.borrarPoderes();
+        ActualizarBotones.actualizarBotonRaza(btnRaza, raza);
+        actualizarFichaPersonaje();
+    }
+
+    @Override
+    public void onDialogoAdvertenciaCancelarListener() {}
 
 }
