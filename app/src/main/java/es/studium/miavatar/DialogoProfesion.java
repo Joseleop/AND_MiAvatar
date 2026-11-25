@@ -11,9 +11,14 @@ import android.widget.RadioGroup;
 
 import androidx.fragment.app.DialogFragment;
 
+/**
+ * Diálogo para elegir la profesión con RadioButtons. Se abre con lo ya elegido marcado
+ * (argumentos) y, al aceptar, devuelve el valor a MainActivity mediante OnDialogoListener.
+ */
 public class DialogoProfesion extends DialogFragment {
     private OnDialogoListener listener;
 
+    // Clave del Bundle del DIÁLOGO: MainActivity la usa para enviar la elección actual.
     public static final String KEY_PROFESION_BUNDLE = "profesion";
 
     @Override
@@ -23,6 +28,7 @@ public class DialogoProfesion extends DialogFragment {
         View dialogoProfesionInflado = inflater.inflate(R.layout.layout_dialogo_profesion, null);
         RadioGroup rgProfesion = dialogoProfesionInflado.findViewById(R.id.rgProfesion);
 
+        // Precarga: marca el RadioButton de la opción que el personaje ya tenía (si había).
         Bundle argumentos = getArguments();
         if(argumentos != null){
             int profesion = argumentos.getInt(KEY_PROFESION_BUNDLE, Personaje.CHECK_PROFESION_SIN_ELEGIR);
@@ -45,6 +51,8 @@ public class DialogoProfesion extends DialogFragment {
                 .setPositiveButton(R.string.dialogo_aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // Traduce el RadioButton marcado (id de R.id) al valor propio de la app (Personaje.CHECK_*).
+                        // Si no hay ninguno marcado se devuelve SIN_ELEGIR y MainActivity lo ignora.
                         int profesion = rgProfesion.getCheckedRadioButtonId();
                         int profesionElegida;
 
@@ -73,6 +81,7 @@ public class DialogoProfesion extends DialogFragment {
         return builder.create();
     }
 
+    // Aquí se obtiene a MainActivity como listener (implementa OnDialogoListener).
     @Override
     public void onAttach(Context context){
         super.onAttach(context);

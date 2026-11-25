@@ -11,9 +11,14 @@ import android.widget.RadioGroup;
 
 import androidx.fragment.app.DialogFragment;
 
+/**
+ * Diálogo para elegir la raza con RadioButtons. Se abre con lo ya elegido marcado
+ * (argumentos) y, al aceptar, devuelve el valor a MainActivity mediante OnDialogoListener.
+ */
 public class DialogoRaza extends DialogFragment {
     private OnDialogoListener listener;
 
+    // Clave del Bundle del DIÁLOGO: MainActivity la usa para enviar la elección actual.
     public static final String KEY_RAZA_BUNDLE = "raza";
 
     @Override
@@ -24,6 +29,7 @@ public class DialogoRaza extends DialogFragment {
         View dialogoRazaInflado = inflater.inflate(R.layout.layout_dialogo_raza, null);
         RadioGroup rgRaza = dialogoRazaInflado.findViewById(R.id.rgRaza);
 
+        // Precarga: marca el RadioButton de la opción que el personaje ya tenía (si había).
         Bundle arguments = getArguments();
         if(arguments != null){
             int raza = arguments.getInt(KEY_RAZA_BUNDLE, Personaje.CHECK_RAZA_SIN_ELEGIR);
@@ -45,6 +51,8 @@ public class DialogoRaza extends DialogFragment {
                 .setPositiveButton(R.string.dialogo_aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // Traduce el RadioButton marcado (id de R.id) al valor propio de la app (Personaje.CHECK_*).
+                        // Si no hay ninguno marcado se devuelve SIN_ELEGIR y MainActivity lo ignora.
                         int raza = rgRaza.getCheckedRadioButtonId();
                         int razaElegida;
 
@@ -70,6 +78,7 @@ public class DialogoRaza extends DialogFragment {
                 });
         return builder.create();
     }
+    // Aquí se obtiene a MainActivity como listener (implementa OnDialogoListener).
     @Override
     public void onAttach(Context context){
         super.onAttach(context);

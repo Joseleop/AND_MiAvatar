@@ -11,9 +11,14 @@ import android.widget.RadioGroup;
 
 import androidx.fragment.app.DialogFragment;
 
+/**
+ * Diálogo para elegir el sexo con RadioButtons. Se abre con lo ya elegido marcado
+ * (argumentos) y, al aceptar, devuelve el valor a MainActivity mediante OnDialogoListener.
+ */
 public class DialogoSexo extends DialogFragment {
     private OnDialogoListener listener;
 
+    // Clave del Bundle del DIÁLOGO: MainActivity la usa para enviar la elección actual.
     public static final String KEY_SEXO_BUNDLE = "sexo";
 
     @Override
@@ -24,6 +29,7 @@ public class DialogoSexo extends DialogFragment {
         View dialogoSexoInflado = inflater.inflate(R.layout.layout_dialogo_sexo, null);
         RadioGroup rgSexo = dialogoSexoInflado.findViewById(R.id.rgSexo);
 
+        // Precarga: marca el RadioButton de la opción que el personaje ya tenía (si había).
         Bundle arguments = getArguments();
         if(arguments != null){
             int sexo = arguments.getInt(KEY_SEXO_BUNDLE, Personaje.CHECK_SEXO_SIN_ELEGIR);
@@ -39,6 +45,8 @@ public class DialogoSexo extends DialogFragment {
                 .setPositiveButton(R.string.dialogo_aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // Traduce el RadioButton marcado (id de R.id) al valor propio de la app (Personaje.CHECK_*).
+                        // Si no hay ninguno marcado se devuelve SIN_ELEGIR y MainActivity lo ignora.
                         int sexo = rgSexo.getCheckedRadioButtonId();
                         int sexoElegido;
                         if(sexo == R.id.rbHombre){
@@ -60,6 +68,7 @@ public class DialogoSexo extends DialogFragment {
                 });
         return builder.create();
     }
+    // Aquí se obtiene a MainActivity como listener (implementa OnDialogoListener).
     @Override
     public void onAttach(Context context){
         super.onAttach(context);

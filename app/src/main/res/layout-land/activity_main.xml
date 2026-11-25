@@ -190,14 +190,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnTirar"
+            android:id="@+id/btnGenerar"
             style="@style/Boton_de_datos"
             android:layout_width="wrap_content"
             android:layout_marginBottom="4dp"
             android:minWidth="0dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="@string/texto_boton_tirar"
+            android:text="@string/texto_boton_generar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnReset"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -216,7 +216,7 @@
             android:text="@string/texto_boton_reiniciar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btnTirar"
+            app:layout_constraintStart_toEndOf="@id/btnGenerar"
             app:layout_constraintTop_toBottomOf="@id/columnaStats" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

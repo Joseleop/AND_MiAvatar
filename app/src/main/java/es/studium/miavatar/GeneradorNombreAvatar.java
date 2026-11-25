@@ -1,11 +1,17 @@
 package es.studium.miavatar;
 
+/**
+ * Construye el nombre del drawable del avatar con el formato sexo_raza_profesion
+ * (por ejemplo hom_elf_arq). MainActivity busca ese nombre en res/drawable.
+ */
 public class GeneradorNombreAvatar {
 
+    // Une las tres abreviaturas con "_". Si falta alguna elige "desc" y no habrá imagen con ese nombre.
     public static String nombreImagen(Personaje personaje) {
         return abreviaturaSexo(personaje) + "_" + abreviaturaRaza(personaje) + "_" + abreviaturaProfesion(personaje);
     }
 
+    // Abreviatura de cada opción tal y como se llaman los archivos de res/drawable.
     private static String abreviaturaSexo(Personaje personaje) {
         if (personaje.getSexo() == Personaje.CHECK_HOMBRE) {
             return "hom";

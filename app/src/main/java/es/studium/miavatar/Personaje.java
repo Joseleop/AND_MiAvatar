@@ -1,7 +1,13 @@
 package es.studium.miavatar;
 
+/**
+ * Modelo del personaje: guarda lo elegido (nombre, sexo, raza, profesión) y los 4 poderes.
+ * No usa nada de Android (ni vistas ni textos): solo datos y comprobaciones sencillas.
+ */
 public class Personaje {
 
+    // Valores PROPIOS de la app para cada opción. No son ids de R.id: cada diálogo traduce
+    // el RadioButton marcado a estos valores. -1 significa "todavía sin elegir".
     public static final int CHECK_SEXO_SIN_ELEGIR = -1;
     public static final int CHECK_HOMBRE = 1;
     public static final int CHECK_MUJER = 2;
@@ -19,21 +25,26 @@ public class Personaje {
     public static final int CHECK_HOBBIT = 3;
     public static final int CHECK_HUMANO = 4;
 
+    // -1 = el poder todavía no se ha generado.
+    public static final int STAT_SIN_GENERAR = -1;
+
+    // Elecciones del usuario (null / -1 mientras no se haya elegido).
     private String nombre;
     private int sexo;
     private int raza;
     private int profesion;
 
+    // Poderes, generados por GeneradorPoderes (-1 mientras no se hayan generado).
     private int vida;
     private int magia;
     private int fuerza;
     private int velocidad;
-    public static final int STAT_SIN_GENERAR = -1;
 
     public Personaje() {
         reiniciar();
     }
 
+    // Deja el personaje como al empezar: sin elecciones y sin poderes.
     public void reiniciar() {
         nombre = null;
         sexo = CHECK_SEXO_SIN_ELEGIR;
@@ -42,6 +53,7 @@ public class Personaje {
         borrarPoderes();
     }
 
+    // Borra solo los poderes (al cambiar raza o profesión hay que generar otros).
     public void borrarPoderes(){
         vida = STAT_SIN_GENERAR;
         magia = STAT_SIN_GENERAR;
@@ -49,6 +61,7 @@ public class Personaje {
         velocidad = STAT_SIN_GENERAR;
     }
 
+    // true si ya tiene nombre, sexo, raza y profesión: solo entonces se muestra la ficha.
     public boolean estaCompleto() {
         if (nombre == null) {
             return false;
@@ -65,6 +78,7 @@ public class Personaje {
         return true;
     }
 
+    // true si los 4 poderes ya están generados (ninguno vale -1).
     public boolean tienePoderes() {
         if (vida == STAT_SIN_GENERAR) {
             return false;
@@ -81,28 +95,7 @@ public class Personaje {
         return true;
     }
 
-    public void setPoderes(int vida, int magia, int fuerza, int velocidad) {
-        this.vida = vida;
-        this.magia = magia;
-        this.fuerza = fuerza;
-        this.velocidad = velocidad;
-    }
-
-    public int getVida() {
-        return vida;
-    }
-
-    public int getMagia() {
-        return magia;
-    }
-
-    public int getFuerza() {
-        return fuerza;
-    }
-
-    public int getVelocidad() {
-        return velocidad;
-    }
+    // ----- Datos elegidos (getters y setters) -----
 
     public String getNombre() {
         return nombre;
@@ -134,5 +127,30 @@ public class Personaje {
 
     public void setProfesion(int profesion) {
         this.profesion = profesion;
+    }
+
+    // ----- Poderes -----
+
+    public void setPoderes(int vida, int magia, int fuerza, int velocidad) {
+        this.vida = vida;
+        this.magia = magia;
+        this.fuerza = fuerza;
+        this.velocidad = velocidad;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public int getMagia() {
+        return magia;
+    }
+
+    public int getFuerza() {
+        return fuerza;
+    }
+
+    public int getVelocidad() {
+        return velocidad;
     }
 }

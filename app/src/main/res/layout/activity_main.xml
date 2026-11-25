@@ -189,10 +189,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnTirar"
+            android:id="@+id/btnGenerar"
             style="@style/Boton_de_datos"
             android:layout_marginTop="16dp"
-            android:text="@string/texto_boton_tirar"
+            android:text="@string/texto_boton_generar"
             app:layout_constraintEnd_toStartOf="@id/guiaColumnas"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivAvatar" />

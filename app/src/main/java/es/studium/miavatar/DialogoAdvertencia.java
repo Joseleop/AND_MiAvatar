@@ -4,23 +4,31 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.fragment.app.DialogFragment;
 
+/**
+ * Aviso genérico "se perderán los poderes actuales". Se usa en tres casos (cambiar raza,
+ * cambiar profesión y generar poderes nuevos). El diálogo no sabe qué acción es: la recibe
+ * como argumento y la devuelve tal cual al aceptar, para que MainActivity la ejecute.
+ */
 public class DialogoAdvertencia extends DialogFragment {
 
+    // Argumentos del DIÁLOGO: tipo = qué acción pide confirmación, valor = lo elegido
+    // (la raza o profesión nueva; en GENERAR_PODERES no se usa).
     public static final String KEY_TIPO_BUNDLE = "tipo";
     public static final String KEY_VALOR_BUNDLE = "valor";
+    // Valores posibles de "tipo".
     public static final int CAMBIO_RAZA = 1;
     public static final int CAMBIO_PROFESION = 2;
-    public static final int TIRAR_PODERES = 3;
+    public static final int GENERAR_PODERES = 3;
 
     private OnDialogoListener listener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Se leen aquí, fuera del lambda, para devolverlos tal cual al pulsar Aceptar.
         int tipo = getArguments().getInt(KEY_TIPO_BUNDLE);
         int valor = getArguments().getInt(KEY_VALOR_BUNDLE);
 
@@ -36,6 +44,7 @@ public class DialogoAdvertencia extends DialogFragment {
         return builder.create();
     }
 
+    // Aquí se obtiene a MainActivity como listener (implementa OnDialogoListener).
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
